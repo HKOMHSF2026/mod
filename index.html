@@ -1,0 +1,2836 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>محادثات تطبيقي</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-storage-compat.js"></script>
+    <style>
+        :root {
+            --dark-background: #101518;
+            --chat-background: #1a2024;
+            --message-bg-self: linear-gradient(to right, #0a4f5f, #0f7a8b); /* Deeper green gradient */
+            --message-bg-other: #2c353d;
+            --text-color: #e0e0e0;
+            --input-bg: #22282d;
+            --button-bg: linear-gradient(135deg, #0a4f5f, #0f7a8b); /* Button with gradient */
+            --button-hover-bg: linear-gradient(135deg, #0f7a8b, #0f9cae);
+            --border-color: #3a474e;
+            --scrollbar-thumb: #5f7a8b;
+            --scrollbar-track: #1a2024;
+            --admin-color: #FFD700; /* Gold */
+            --owner-color: #007bff; /* Blue for owner verified badge */
+            --blocked-color: #DC143C; /* Crimson */
+            --muted-color: #808080; /* Gray */
+            --glow-color: rgba(15, 122, 139, 0.4); /* Greenish glow */
+            --reply-quote-bg: #3a474e;
+            --edit-message-color: #6a95f9;
+            --delete-message-color: #DC3545; /* Red for delete */
+            --limited-color: #FFA500; /* Orange for limited users */
+            --set-admin-color: #007bff; /* Blue for set admin button */
+            --delete-member-color: #CC0000; /* Darker red for delete member */
+            --error-color: #FF4136; /* Bright red for errors */
+            --private-chat-color: #8A2BE2; /* BlueViolet for private chat */
+            --unread-indicator-color: #DC143C; /* Red for unread messages */
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html, body {
+            height: 100%;
+            font-family: 'Cairo', 'Roboto', sans-serif;
+            background-color: var(--dark-background);
+            color: var(--text-color);
+            overflow: hidden;
+            direction: rtl; /* Right-to-left for Arabic */
+            text-align: right;
+        }
+
+        #app {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            max-width: 100vw;
+            margin: 0 auto;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(10px);
+            background-color: rgba(26, 32, 36, 0.8);
+        }
+
+        /* --- Login/Register Screen --- */
+        #login-screen {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            text-align: center;
+            padding: 40px;
+            position: relative;
+            overflow: hidden;
+            background: radial-gradient(circle at top left, rgba(15, 122, 139, 0.4) 0%, transparent 50%),
+                        radial-gradient(circle at bottom right, rgba(10, 79, 95, 0.4) 0%, transparent 50%),
+                        linear-gradient(180deg, #101518, #1a2024);
+            background-size: 200% 200%;
+            animation: backgroundPan 20s infinite alternate;
+        }
+
+        @keyframes backgroundPan {
+            0% { background-position: 0% 0%; }
+            100% { background-position: 100% 100%; }
+        }
+
+        #login-screen::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            backdrop-filter: blur(5px);
+            z-index: 0;
+        }
+
+        #login-screen > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        #app-logo {
+            width: 150px;
+            height: auto;
+            margin-bottom: 30px;
+            border-radius: 50%;
+            box-shadow: 0 0 25px rgba(0, 0, 0, 0.7), 0 0 10px var(--glow-color);
+            transition: transform 0.3s ease;
+        }
+        #app-logo:hover {
+            transform: scale(1.05) rotate(5deg);
+        }
+
+        #login-screen h1 {
+            font-size: 3.5em;
+            margin-bottom: 15px;
+            color: #fff;
+            text-shadow: 0 5px 15px rgba(0, 0, 0, 0.7);
+            letter-spacing: 2px;
+            line-height: 1.2;
+            background: linear-gradient(45deg, #e0e0e0, #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        #login-screen p {
+            font-size: 1.5em;
+            color: #c0c0c0;
+            margin-bottom: 30px;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+            font-weight: 300;
+        }
+
+        .auth-form {
+            background-color: rgba(0, 0, 0, 0.4);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            width: 100%;
+            max-width: 400px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .auth-form input[type="text"],
+        .auth-form input[type="email"],
+        .auth-form input[type="password"] {
+            width: 100%;
+            padding: 12px 18px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            background-color: var(--input-bg);
+            color: var(--text-color);
+            font-size: 1.1em;
+            outline: none;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            text-align: right;
+        }
+
+        .auth-form input[type="text"]:focus,
+        .auth-form input[type="email"]:focus,
+        .auth-form input[type="password"]:focus {
+            border-color: var(--button-hover-bg);
+            box-shadow: 0 0 8px var(--glow-color);
+        }
+
+        .auth-form button {
+            background: linear-gradient(135deg, #2ecc71, #27ae60);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            text-transform: uppercase;
+        }
+
+        .auth-form button:hover {
+            background: linear-gradient(135deg, #27ae60, #2ecc71);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .link-button {
+            background: none;
+            border: none;
+            color: #a0c2cc;
+            cursor: pointer;
+            font-size: 0.95em;
+            margin-top: 10px;
+            transition: color 0.2s ease;
+        }
+        .link-button:hover {
+            color: #fff;
+        }
+
+
+        /* --- Chat Screen --- */
+        #chat-screen {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            background-color: var(--chat-background);
+        }
+
+        #chat-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 25px;
+            background: linear-gradient(to right, #0a4f5f, #0f7a8b);
+            border-bottom: 1px solid var(--border-color);
+            color: #fff;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.4);
+            flex-shrink: 0;
+            position: relative; /* For chat mode indicator */
+        }
+
+        #chat-mode-indicator {
+            position: absolute;
+            top: 50%;
+            right: 50%; /* Adjusted for RTL */
+            transform: translate(50%, -50%); /* Adjusted for RTL */
+            background-color: rgba(0, 0, 0, 0.3);
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.9em;
+            font-weight: bold;
+            color: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(2px);
+        }
+        #chat-mode-indicator.private-chat {
+            background-color: var(--private-chat-color);
+            color: white;
+            box-shadow: 0 0 10px rgba(138, 43, 226, 0.6);
+        }
+
+        #user-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        #user-info img {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            border: 3px solid #fff;
+            box-shadow: 0 0 10px var(--glow-color);
+        }
+
+        #user-info span {
+            font-weight: bold;
+            font-size: 1.2em;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+        }
+
+        #header-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .icon-button {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.8em;
+            cursor: pointer;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            position: relative; /* Make relative for unread indicator positioning */
+        }
+
+        .icon-button:hover {
+            background-color: rgba(255, 255, 255, 0.15);
+            transform: scale(1.05);
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+        }
+        
+        /* Specific styling for the unread indicator dot */
+        #user-list-button .unread-indicator {
+            position: absolute;
+            top: 5px;
+            right: 5px; /* Adjusted for RTL */
+            width: 12px;
+            height: 12px;
+            background-color: var(--unread-indicator-color);
+            border-radius: 50%;
+            border: 2px solid var(--chat-background); /* Matches background */
+            display: none; /* Hidden by default */
+        }
+
+
+        /* Adjust icon sizes for mobile */
+        @media (max-width: 768px) {
+            .icon-button {
+                font-size: 1.5em;
+                width: 38px;
+                height: 38px;
+            }
+        }
+
+
+        #messages-container {
+            flex-grow: 1;
+            padding: 20px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        #messages-container::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        #messages-container::-webkit-scrollbar-track {
+            background: var(--scrollbar-track);
+            border-radius: 5px;
+        }
+
+        #messages-container::-webkit-scrollbar-thumb {
+            background-color: var(--scrollbar-thumb);
+            border-radius: 5px;
+            border: 2px solid var(--chat-background);
+        }
+
+        .message {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            animation: fadeIn 0.4s ease-out;
+            position: relative;
+        }
+
+        .message.self {
+            justify-content: flex-end;
+        }
+
+        .message-content {
+            max-width: 75%;
+            padding: 12px 18px;
+            border-radius: 20px;
+            word-wrap: break-word;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.2s ease;
+        }
+
+        .message.self .message-content {
+            background: var(--message-bg-self);
+            color: #fff;
+            border-bottom-left-radius: 2px; /* Changed for RTL */
+        }
+
+        .message.other .message-content {
+            background-color: var(--message-bg-other);
+            color: var(--text-color);
+            border-bottom-right-radius: 2px; /* Changed for RTL */
+        }
+
+        .message-avatar {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--border-color);
+            flex-shrink: 0;
+            transition: transform 0.2s ease;
+        }
+
+        .message-avatar:hover {
+            transform: scale(1.05);
+        }
+
+        .message-info {
+            font-size: 0.85em;
+            opacity: 0.85;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            justify-content: flex-end; /* Align info right for RTL */
+        }
+
+        .message.self .message-info {
+            justify-content: flex-start; /* Align info left for RTL */
+        }
+
+        .message-info .username {
+            font-weight: bold;
+            color: #a0c2cc; /* Lighter color for username */
+        }
+        
+        .verified-badge {
+            font-size: 0.8em;
+            margin-right: 5px; /* Adjust spacing for RTL */
+            vertical-align: middle;
+        }
+
+        .badge-owner {
+            color: var(--owner-color); /* Blue for owner */
+        }
+
+        .badge-admin {
+            color: var(--admin-color); /* Gold for admin */
+        }
+
+        .message-info .timestamp {
+            font-size: 0.78em;
+            color: #8899a6;
+        }
+
+        .message-text {
+            font-size: 1.05em;
+            line-height: 1.5;
+            white-space: pre-wrap; /* Preserve whitespace and breaks for emojis */
+        }
+
+        .message.blocked .message-content {
+            opacity: 0.4;
+            text-decoration: line-through;
+            filter: grayscale(100%);
+        }
+
+        .message.muted .message-content {
+            filter: grayscale(100%) brightness(0.7);
+            opacity: 0.7;
+            border: 1px dashed var(--muted-color);
+        }
+
+        .message.limited .message-content {
+            border: 2px dashed var(--limited-color);
+            opacity: 0.8;
+        }
+
+        .message-actions {
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100%);
+            display: flex;
+            gap: 5px;
+            opacity: 0;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            z-index: 10;
+        }
+
+        .message:hover .message-actions { /* Show on hover for both self and other */
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+        
+        .message-action-button {
+            background-color: rgba(0, 0, 0, 0.4);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 6px 10px;
+            font-size: 0.8em;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .message-action-button:hover {
+            background-color: rgba(0, 0, 0, 0.6);
+        }
+
+        .message-action-button.edit { background-color: var(--edit-message-color); }
+        .message-action-button.edit:hover { background-color: #557edb; }
+
+        .message-action-button.reply { background-color: #28a745; }
+        .message-action-button.reply:hover { background-color: #218838; }
+
+        .message-action-button.delete { background-color: var(--delete-message-color); }
+        .message-action-button.delete:hover { background-color: #A01020; }
+
+        /* Reply Quote in Message */
+        .reply-quote {
+            background-color: var(--reply-quote-bg);
+            border-right: 3px solid var(--button-hover-bg); /* Changed for RTL */
+            padding: 5px 10px;
+            margin-bottom: 8px;
+            border-radius: 5px;
+            font-size: 0.9em;
+            color: #b0c2d0;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .reply-quote .quoted-user {
+            font-weight: bold;
+            color: #a0c2cc;
+        }
+
+        /* Reply Preview above input */
+        #reply-preview-container {
+            background-color: var(--reply-quote-bg);
+            border-top: 1px solid var(--border-color);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.95em;
+            color: var(--text-color);
+            position: relative;
+            z-index: 50;
+        }
+
+        #reply-preview-content {
+            flex-grow: 1;
+            padding-right: 15px; /* Adjust for close button */
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        #reply-preview-content .quoted-user {
+            font-weight: bold;
+            color: #a0c2cc;
+        }
+
+        #clear-reply-button {
+            background: none;
+            border: none;
+            color: #DC143C;
+            font-size: 1.5em;
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+        #clear-reply-button:hover {
+            color: #B22222;
+        }
+
+
+        /* --- Chat Input --- */
+        #chat-input-container {
+            display: flex;
+            padding: 15px 20px;
+            border-top: 1px solid var(--border-color);
+            background-color: var(--chat-background);
+            gap: 10px;
+            flex-shrink: 0;
+            align-items: center;
+        }
+
+        #message-input {
+            flex-grow: 1;
+            padding: 14px 20px;
+            border: 1px solid var(--border-color);
+            border-radius: 28px;
+            background-color: var(--input-bg);
+            color: var(--text-color);
+            font-size: 1.05em;
+            outline: none;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            text-align: right; /* RTL */
+        }
+
+        #message-input:focus {
+            border-color: var(--button-hover-bg);
+            box-shadow: 0 0 8px var(--glow-color);
+        }
+
+        #emoji-button {
+            background: none;
+            border: none;
+            font-size: 1.8em;
+            cursor: pointer;
+            padding: 5px;
+            color: #a0c2cc;
+            transition: color 0.2s ease, transform 0.2s ease;
+        }
+
+        #emoji-button:hover {
+            color: #fff;
+            transform: scale(1.1);
+        }
+
+        #emoji-picker {
+            position: absolute;
+            bottom: calc(var(--chat-input-container-height) + 10px); /* Position above input */
+            right: 20px;
+            z-index: 1001;
+            background-color: var(--input-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 10px;
+            display: none;
+            flex-wrap: wrap;
+            gap: 5px;
+            width: 280px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        #emoji-picker span {
+            font-size: 1.5em;
+            cursor: pointer;
+            padding: 4px;
+            border-radius: 4px;
+            transition: background-color 0.2s ease;
+        }
+
+        #emoji-picker span:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Send button as icon */
+        #send-button {
+            background: var(--button-bg);
+            color: white;
+            border: none;
+            border-radius: 50%; /* Make it round */
+            width: 50px; /* Fixed width for icon button */
+            height: 50px; /* Fixed height for icon button */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5em; /* Icon size */
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        #send-button:hover {
+            background: var(--button-hover-bg);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        #send-button:disabled {
+            background: #444;
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        /* --- Modals (User List, Profile, Actions, Error) --- */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.7);
+            justify-content: center;
+            align-items: center;
+            animation: fadeInModal 0.3s ease-out;
+        }
+
+        .modal-content {
+            background-color: var(--chat-background);
+            margin: auto;
+            padding: 30px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 600px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
+            position: relative;
+            animation: slideIn 0.3s ease-out;
+            color: var(--text-color);
+            border: 1px solid var(--border-color);
+        }
+
+        .modal-content h2 {
+            color: #fff;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 1.8em;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 10px;
+        }
+
+        .close-button {
+            color: var(--text-color);
+            font-size: 32px;
+            font-weight: bold;
+            position: absolute;
+            top: 15px;
+            left: 20px; /* Changed for RTL */
+            cursor: pointer;
+            transition: color 0.2s ease, transform 0.2s ease;
+        }
+
+        .close-button:hover,
+        .close-button:focus {
+            color: #aaa;
+            transform: rotate(90deg);
+        }
+
+        /* Error Modal Specific Styles */
+        #error-modal .modal-content h2 {
+            color: var(--error-color);
+            border-bottom-color: var(--error-color);
+        }
+        #error-modal .modal-buttons button {
+            background-color: var(--error-color);
+        }
+        #error-modal .modal-buttons button:hover {
+            background-color: #c40000;
+        }
+
+
+        #user-list-search {
+            width: 100%;
+            padding: 10px 15px;
+            margin-bottom: 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            background-color: var(--input-bg);
+            color: var(--text-color);
+            font-size: 1em;
+            outline: none;
+            text-align: right;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        #user-list-search:focus {
+            border-color: var(--button-hover-bg);
+            box-shadow: 0 0 8px var(--glow-color);
+        }
+
+        #user-list ul {
+            list-style: none;
+            max-height: 400px; /* Adjusted height for search input */
+            overflow-y: auto;
+            padding-left: 10px; /* Changed for RTL */
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        #user-list ul::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        #user-list ul::-webkit-scrollbar-track {
+            background: var(--scrollbar-track);
+            border-radius: 4px;
+        }
+
+        #user-list ul::-webkit-scrollbar-thumb {
+            background-color: var(--scrollbar-thumb);
+            border-radius: 4px;
+            border: 2px solid var(--chat-background);
+        }
+
+        #user-list li {
+            display: flex;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border-color);
+            gap: 15px;
+            transition: background-color 0.2s ease;
+            position: relative; /* For unread indicator on list item */
+        }
+
+        #user-list li:last-child {
+            border-bottom: none;
+        }
+
+        #user-list li:hover {
+            background-color: #283038;
+            border-radius: 5px;
+        }
+
+        #user-list .user-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--border-color);
+            box-shadow: 0 0 5px var(--glow-color);
+        }
+
+        #user-list .user-details {
+            flex-grow: 1;
+            text-align: right;
+        }
+
+        #user-list .user-name {
+            font-weight: bold;
+            font-size: 1.2em;
+            margin-bottom: 4px;
+            color: #fff;
+        }
+        
+        #user-list .user-name .unread-indicator-inline {
+            background-color: var(--unread-indicator-color);
+            color: white;
+            padding: 2px 6px;
+            border-radius: 12px;
+            font-size: 0.7em;
+            margin-right: 8px; /* Adjusted for RTL */
+            vertical-align: middle;
+        }
+
+        #user-list .user-role {
+            font-size: 1em;
+            color: #a0c2cc;
+        }
+
+        .role-admin {
+            color: var(--admin-color);
+            font-weight: bold;
+        }
+
+        .role-owner {
+            color: var(--owner-color);
+            font-weight: bold;
+        }
+
+        #user-list .user-actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap; /* Allow buttons to wrap on smaller screens */
+            justify-content: flex-end;
+        }
+        @media (max-width: 480px) {
+            #user-list .user-actions {
+                flex-direction: column;
+                align-items: flex-end;
+            }
+            #user-list .user-actions button {
+                width: 100%;
+            }
+        }
+
+
+        #user-list .user-actions button {
+            background: var(--button-bg);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 8px 15px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        #user-list .user-actions button:hover {
+            background: var(--button-hover-bg);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        #user-list .user-actions button.block {
+            background-color: var(--blocked-color);
+        }
+        #user-list .user-actions button.block:hover {
+            background-color: #A01020;
+        }
+
+        #user-list .user-actions button.mute {
+            background-color: var(--muted-color);
+        }
+        #user-list .user-actions button.mute:hover {
+            background-color: #606060;
+        }
+
+        #user-list .user-actions button.limit {
+            background-color: var(--limited-color);
+        }
+        #user-list .user-actions button.limit:hover {
+            background-color: #CC8400;
+        }
+
+        #user-list .user-actions button.set-admin {
+            background-color: #007bff;
+        }
+        #user-list .user-actions button.set-admin:hover {
+            background-color: #0056b3;
+        }
+
+        #user-list .user-actions button.change-photo {
+            background-color: #6c757d; /* Grey color for photo change */
+        }
+        #user-list .user-actions button.change-photo:hover {
+            background-color: #5a6268;
+        }
+        
+        #user-list .user-actions button.delete-member {
+            background-color: var(--delete-member-color); /* New color for delete member */
+        }
+        #user-list .user-actions button.delete-member:hover {
+            background-color: #A00000;
+        }
+
+        #user-list .user-actions button.private-chat-button {
+            background-color: var(--private-chat-color);
+        }
+        #user-list .user-actions button.private-chat-button:hover {
+            background-color: #6A1AA0; /* Darker purple */
+        }
+
+
+        /* --- Profile Modal --- */
+        #profile-modal .modal-content {
+            text-align: center;
+        }
+        #profile-modal img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 4px solid var(--button-hover-bg);
+            margin-bottom: 20px;
+            box-shadow: 0 0 15px var(--glow-color);
+        }
+        #profile-modal input[type="text"] {
+            width: calc(100% - 40px);
+            padding: 12px 15px;
+            margin-bottom: 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            background-color: var(--input-bg);
+            color: var(--text-color);
+            font-size: 1.1em;
+            outline: none;
+            text-align: right; /* RTL */
+        }
+        /* لا يوجد هنا أي CSS خاص بـ input[type="file"] لملف تعريف المستخدم الشخصي */
+
+        #profile-modal button {
+            background: var(--button-bg);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 25px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px; /* Space from input */
+        }
+        #profile-modal button:hover {
+            background: var(--button-hover-bg);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        /* --- Change User Photo Modal --- */
+        #change-user-photo-modal .modal-content {
+            text-align: center;
+        }
+        #change-user-photo-modal img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 4px solid var(--button-hover-bg);
+            margin-bottom: 20px;
+            box-shadow: 0 0 15px var(--glow-color);
+        }
+        /* NEW: Style for the URL input for changing user photo */
+        #change-user-photo-modal input[type="text"] {
+            width: calc(100% - 40px);
+            padding: 12px 15px;
+            margin-bottom: 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            background-color: var(--input-bg);
+            color: var(--text-color);
+            font-size: 1.1em;
+            outline: none;
+            text-align: right;
+        }
+
+        #change-user-photo-modal .modal-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        #change-user-photo-modal .modal-buttons button {
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: all 0.3s ease;
+        }
+        #change-user-photo-modal .modal-buttons button.confirm {
+            background: var(--button-bg);
+            color: white;
+        }
+        #change-user-photo-modal .modal-buttons button.confirm:hover {
+            background: var(--button-hover-bg);
+        }
+        #change-user-photo-modal .modal-buttons button.cancel {
+            background-color: #555;
+            color: white;
+        }
+        #change-user-photo-modal .modal-buttons button.cancel:hover {
+            background-color: #777;
+        }
+
+
+        /* --- Limit User Modal --- */
+        #limit-user-modal select, #limit-user-modal input[type="number"] {
+            width: calc(100% - 40px);
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            background-color: var(--input-bg);
+            color: var(--text-color);
+            font-size: 1em;
+            direction: rtl;
+            text-align: right;
+        }
+        #limit-user-modal label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        #limit-user-modal .modal-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        #limit-user-modal .modal-buttons button {
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: all 0.3s ease;
+        }
+        #limit-user-modal .modal-buttons button.confirm {
+            background: var(--button-bg);
+            color: white;
+        }
+        #limit-user-modal .modal-buttons button.confirm:hover {
+            background: var(--button-hover-bg);
+        }
+        #limit-user-modal .modal-buttons button.cancel {
+            background-color: #555;
+            color: white;
+        }
+        #limit-user-modal .modal-buttons button.cancel:hover {
+            background-color: #777;
+        }
+
+
+        /* --- Responsive Design --- */
+        @media (max-width: 768px) {
+            #app {
+                border-radius: 0;
+            }
+
+            #login-screen h1 {
+                font-size: 2.5em; /* Adjusted for new style */
+            }
+            #login-screen p {
+                font-size: 1.2em; /* Adjusted for new style */
+            }
+            .auth-form {
+                padding: 20px;
+            }
+            .auth-form input {
+                font-size: 1em;
+                padding: 10px 15px;
+            }
+            .auth-form button {
+                padding: 12px 25px;
+                font-size: 1em;
+            }
+            #app-logo {
+                width: 100px; /* Adjusted for new style */
+                margin-bottom: 20px; /* Adjusted for new style */
+            }
+            
+            #chat-header {
+                padding: 10px 15px;
+            }
+            #chat-mode-indicator {
+                font-size: 0.7em;
+                padding: 3px 8px;
+            }
+            #user-info img {
+                width: 35px;
+                height: 35px;
+            }
+            #user-info span {
+                font-size: 1.1em;
+            }
+            .icon-button {
+                font-size: 1.5em;
+                width: 38px;
+                height: 38px;
+            }
+            #user-list-button .unread-indicator {
+                top: 2px;
+                right: 2px;
+                width: 10px;
+                height: 10px;
+            }
+
+            #messages-container {
+                padding: 10px;
+            }
+            .message-content {
+                max-width: 90%;
+                padding: 10px 15px;
+                font-size: 0.95em;
+            }
+            .message-avatar {
+                width: 30px;
+                height: 30px;
+            }
+            .message-info {
+                font-size: 0.8em;
+            }
+
+            #chat-input-container {
+                padding: 10px 15px;
+                --chat-input-container-height: 60px; /* Approximate height for mobile */
+            }
+            #message-input {
+                padding: 10px 15px;
+                font-size: 0.95em;
+            }
+            #send-button {
+                width: 45px;
+                height: 45px;
+                font-size: 1.3em;
+            }
+            #emoji-button {
+                font-size: 1.5em;
+            }
+            #emoji-picker {
+                bottom: calc(var(--chat-input-container-height) + 10px);
+                right: 15px;
+                width: 250px;
+                gap: 3px;
+            }
+            #emoji-picker span {
+                font-size: 1.2em;
+            }
+
+            .modal-content {
+                width: 95%;
+                padding: 20px;
+            }
+            .modal-content h2 {
+                font-size: 1.5em;
+            }
+            .close-button {
+                font-size: 28px;
+                left: 15px; /* Changed for RTL */
+            }
+            #user-list .user-avatar {
+                width: 40px;
+                height: 40px;
+            }
+            #user-list .user-name {
+                font-size: 1.1em;
+            }
+            #user-list .user-role {
+                font-size: 0.9em;
+            }
+            #user-list .user-actions button {
+                padding: 7px 12px;
+                font-size: 0.8em;
+            }
+        }
+
+        /* Set variable for input container height for emoji picker positioning */
+        #chat-input-container {
+            --chat-input-container-height: 70px; /* Default desktop height */
+        }
+
+        /* --- Animations --- */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes fadeInModal {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Specific CSS for the User List Status Indicators */
+        #user-list .user-name span.status-indicator { /* Apply to all status indicators */
+            margin-right: 5px; /* Spacing between indicators */
+            padding: 2px 6px;
+            border-radius: 44px; /* More rounded */
+            font-size: 0.7em;
+            font-weight: normal;
+            vertical-align: middle;
+            display: inline-block; /* Allow padding/margin to work */
+        }
+        #user-list .user-name span.status-indicator.blocked {
+            background-color: rgba(220, 20, 60, 0.2); /* Semi-transparent background */
+            border: 1px solid var(--blocked-color);
+            color: var(--blocked-color);
+        }
+        #user-list .user-name span.status-indicator.muted {
+            background-color: rgba(128, 128, 128, 0.2);
+            border: 1px solid var(--muted-color);
+            color: var(--muted-color);
+        }
+        #user-list .user-name span.status-indicator.limited {
+            background-color: rgba(255, 165, 0, 0.2);
+            border: 1px solid var(--limited-color);
+            color: var(--limited-color);
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div id="login-screen">
+            <img id="app-logo" src="https://d.top4top.io/p_3437coa631.jpg" alt="شعار التطبيق">
+            <h1>أهلاً بك في عراق كرافت</h1>
+            <p>عالمك بين يديك</p>
+            
+            <div id="auth-form-container">
+                <form id="register-form" class="auth-form">
+                    <h2>إنشاء حساب جديد</h2>
+                    <input type="text" id="register-username" placeholder="اسم المستخدم" required>
+                    <input type="email" id="register-email" placeholder="البريد الإلكتروني" required>
+                    <input type="password" id="register-password" placeholder="كلمة المرور (6 أحرف على الأقل)" required>
+                    <button type="submit">إنشاء حساب</button>
+                    <button type="button" id="toggle-to-login" class="link-button">لدي حساب بالفعل؟ تسجيل الدخول</button>
+                </form>
+
+                <form id="login-form" class="auth-form" style="display: none;">
+                    <h2>تسجيل الدخول</h2>
+                    <input type="email" id="login-email" placeholder="البريد الإلكتروني" required>
+                    <input type="password" id="login-password" placeholder="كلمة المرور" required>
+                    <button type="submit">تسجيل الدخول</button>
+                    <button type="button" id="toggle-to-register" class="link-button">لا أملك حسابًا؟ إنشاء حساب</button>
+                </form>
+            </div>
+        </div>
+
+        <div id="chat-screen" style="display: none;">
+            <div id="chat-header">
+                <div id="user-info">
+                    <img id="user-avatar" src="" alt="صورة المستخدم">
+                    <span id="user-name"></span>
+                </div>
+                <div id="chat-mode-indicator">الشات العام</div>
+                <div id="header-buttons">
+                    <button id="public-chat-button" class="icon-button" title="العودة للشات العام" style="display: none;"><i class="fas fa-comments"></i></button>
+                    <button id="edit-profile-button" class="icon-button" title="تعديل الملف الشخصي"><i class="fas fa-user-edit"></i></button>
+                    <button id="user-list-button" class="icon-button" title="المستخدمون">
+                        <i class="fas fa-users"></i>
+                        <span class="unread-indicator" id="user-list-unread-indicator"></span>
+                    </button>
+                    <button id="logout-button" class="icon-button" title="تسجيل الخروج"><i class="fas fa-sign-out-alt"></i></button>
+                </div>
+            </div>
+
+            <div id="messages-container">
+                </div>
+
+            <div id="reply-preview-container" style="display: none;">
+                <div id="reply-preview-content">
+                    الرد على <span class="quoted-user"></span>: <span class="quoted-text"></span>
+                </div>
+                <button id="clear-reply-button"><i class="fas fa-times-circle"></i></button>
+            </div>
+
+            <div id="chat-input-container">
+                <button id="emoji-button">😊</button>
+                <input type="text" id="message-input" placeholder="اكتب رسالتك هنا...">
+                <button id="send-button"><i class="fas fa-paper-plane"></i></button>
+                <div id="emoji-picker" style="display: none;"></div>
+            </div>
+        </div>
+
+        <div id="user-list-modal" class="modal">
+            <div class="modal-content">
+                <span class="close-button" id="close-user-list-modal">&times;</span>
+                <h2>مستخدمو الشات</h2>
+                <input type="text" id="user-list-search" placeholder="ابحث عن عضو...">
+                <ul id="user-list">
+                    </ul>
+            </div>
+        </div>
+
+        <div id="profile-modal" class="modal">
+            <div class="modal-content">
+                <span class="close-button" id="close-profile-modal">&times;</span>
+                <h2>تعديل الملف الشخصي</h2>
+                <img id="profile-modal-avatar" src="" alt="صورة المستخدم">
+                <input type="text" id="profile-display-name-input" placeholder="اسم العرض الجديد">
+                <button id="save-profile-button">حفظ التغييرات</button>
+            </div>
+        </div>
+
+        <div id="user-action-modal" class="modal">
+            <div class="modal-content">
+                <span class="close-button" id="close-user-action-modal">&times;</span>
+                <h2 id="action-modal-title"></h2>
+                <p id="action-modal-message" style="text-align: center; margin-bottom: 20px; font-size: 1.1em;"></p>
+                <div style="display: flex; justify-content: center; margin-top: 20px; gap: 15px;">
+                    <button id="confirm-action-button" class="header-button" style="background-color: var(--blocked-color);">تأكيد</button>
+                    <button id="cancel-action-button" class="header-button">إلغاء</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="limit-user-modal" class="modal">
+            <div class="modal-content">
+                <span class="close-button" id="close-limit-user-modal">&times;</span>
+                <h2>تقييد المستخدم: <span id="limited-user-name"></span></h2>
+                <label for="limit-duration-value">مدة التقييد:</label>
+                <input type="number" id="limit-duration-value" value="1" min="1">
+                <label for="limit-duration-unit">الوحدة:</label>
+                <select id="limit-duration-unit">
+                    <option value="minutes">دقائق</option>
+                    <option value="hours">ساعات</option>
+                    <option value="days">أيام</option>
+                </select>
+                <div class="modal-buttons">
+                    <button id="confirm-limit-button" class="confirm">تقييد</button>
+                    <button id="cancel-limit-button" class="cancel">إلغاء</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="change-user-photo-modal" class="modal">
+            <div class="modal-content">
+                <span class="close-button" id="close-change-user-photo-modal">&times;</span>
+                <h2>تغيير صورة المستخدم: <span id="target-user-photo-name"></span></h2>
+                <img id="target-user-photo-preview" src="" alt="صورة المستخدم">
+                <input type="text" id="new-user-photo-url-input" placeholder="رابط الصورة الجديد (URL)">
+                <div class="modal-buttons">
+                    <button id="upload-user-photo-button" class="confirm">تغيير الصورة</button>
+                    <button id="cancel-user-photo-button" class="cancel">إلغاء</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="error-modal" class="modal">
+            <div class="modal-content">
+                <span class="close-button" id="close-error-modal">&times;</span>
+                <h2 id="error-modal-title">خطأ!</h2> 
+                <p id="error-modal-message" style="text-align: center; margin-bottom: 20px; font-size: 1.1em; color: var(--text-color);"></p>
+                <div class="modal-buttons">
+                    <button id="ok-error-button" class="confirm">موافق</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Firebase Configuration: REMEMBER TO REPLACE THESE WITH YOUR ACTUAL PROJECT'S CONFIG
+        // يمكنك الحصول على هذه القيم من إعدادات مشروعك في لوحة تحكم Firebase (Project settings -> Your apps)
+        const firebaseConfig = {
+            apiKey: "AIzaSyCZ8NRY-S_ZmE6UFVFmiC0mV250_mOyiKw", 
+            authDomain: "shat-54838.firebaseapp.com", 
+            databaseURL: "https://shat-54838-default-rtdb.firebaseio.com", 
+            projectId: "shat-54838", 
+            storageBucket: "shat-54838.firebasestorage.app", 
+            messagingSenderId: "1059645058008", 
+            appId: "1:1059645058008:web:91ead692569994e1d4a0ad", 
+            measurementId: "G-31910LJDSH" 
+        };
+
+        // Initialize Firebase using the v8 compat syntax
+        firebase.initializeApp(firebaseConfig);
+
+        // Get service references using the v8 compat syntax
+        const auth = firebase.auth();
+        const database = firebase.database();
+        const storage = firebase.storage();
+
+        // Enable Firebase persistence
+        firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
+            .then(() => {
+                console.log("Firebase Auth persistence enabled.");
+            })
+            .catch((error) => {
+                handleFirebaseError(error);
+            });
+
+
+        // DOM Elements
+        const loginScreen = document.getElementById('login-screen');
+        const chatScreen = document.getElementById('chat-screen');
+
+        // Auth Form Elements
+        const registerForm = document.getElementById('register-form');
+        const registerUsernameInput = document.getElementById('register-username');
+        const registerEmailInput = document.getElementById('register-email');
+        const registerPasswordInput = document.getElementById('register-password');
+        const toggleToLoginButton = document.getElementById('toggle-to-login');
+
+        const loginForm = document.getElementById('login-form');
+        const loginEmailInput = document.getElementById('login-email');
+        const loginPasswordInput = document.getElementById('login-password');
+        const toggleToRegisterButton = document.getElementById('toggle-to-register');
+
+        const logoutButton = document.getElementById('logout-button');
+        const userAvatar = document.getElementById('user-avatar');
+        const userName = document.getElementById('user-name');
+        const messagesContainer = document.getElementById('messages-container');
+        const messageInput = document.getElementById('message-input');
+        const sendButton = document.getElementById('send-button');
+        const userListButton = document.getElementById('user-list-button');
+        const userListUnreadIndicator = document.getElementById('user-list-unread-indicator'); // NEW UNREAD INDICATOR ELEMENT
+        const userListModal = document.getElementById('user-list-modal');
+        const closeUserListModal = document.getElementById('close-user-list-modal');
+        const userListSearchInput = document.getElementById('user-list-search'); 
+        const userListUl = document.getElementById('user-list');
+        const userActionModal = document.getElementById('user-action-modal');
+        const closeUserActionModal = document.getElementById('close-user-action-modal');
+        const actionModalTitle = document.getElementById('action-modal-title');
+        const actionModalMessage = document.getElementById('action-modal-message');
+        const confirmActionButton = document.getElementById('confirm-action-button');
+        const cancelActionButton = document.getElementById('cancel-action-button');
+        const editProfileButton = document.getElementById('edit-profile-button');
+        const profileModal = document.getElementById('profile-modal');
+        const closeProfileModal = document.getElementById('close-profile-modal');
+        const profileModalAvatar = document.getElementById('profile-modal-avatar');
+        const profileDisplayNameInput = document.getElementById('profile-display-name-input');
+        const saveProfileButton = document.getElementById('save-profile-button');
+        const emojiButton = document.getElementById('emoji-button');
+        const emojiPicker = document.getElementById('emoji-picker');
+        const replyPreviewContainer = document.getElementById('reply-preview-container');
+        const replyPreviewContent = document.getElementById('reply-preview-content');
+        const clearReplyButton = document.getElementById('clear-reply-button');
+        const limitUserModal = document.getElementById('limit-user-modal');
+        const closeLimitUserModal = document.getElementById('close-limit-user-modal');
+        const limitedUserNameSpan = document.getElementById('limited-user-name');
+        const limitDurationValueInput = document.getElementById('limit-duration-value');
+        const limitDurationUnitSelect = document.getElementById('limit-duration-unit');
+        const confirmLimitButton = document.getElementById('confirm-limit-button');
+        const cancelLimitButton = document.getElementById('cancel-limit-button');
+
+        // Elements for changing user photo by owner
+        const changeUserPhotoModal = document.getElementById('change-user-photo-modal');
+        const closeChangeUserPhotoModal = document.getElementById('close-change-user-photo-modal');
+        const targetUserPhotoNameSpan = document.getElementById('target-user-photo-name');
+        const targetUserPhotoPreview = document.getElementById('target-user-photo-preview');
+        const newUserPhotoUrlInput = document.getElementById('new-user-photo-url-input');
+        const uploadUserPhotoButton = document.getElementById('upload-user-photo-button');
+        const cancelUserPhotoButton = document.getElementById('cancel-user-photo-button');
+
+        // Error/Success Modal elements
+        const errorModal = document.getElementById('error-modal');
+        const closeErrorModal = document.getElementById('close-error-modal');
+        const errorModalTitle = document.getElementById('error-modal-title'); 
+        const errorModalMessage = document.getElementById('error-modal-message');
+        const okErrorButton = document.getElementById('ok-error-button');
+
+        // Private Chat elements
+        const chatModeIndicator = document.getElementById('chat-mode-indicator');
+        const publicChatButton = document.getElementById('public-chat-button');
+        
+        let currentUser = null;
+        let currentUserRole = 'member'; // Default role
+        let allUsersData = {}; // To store all users for search filtering
+        let replyingToMessage = null; // Stores message data being replied to
+        let editingMessageId = null; // Stores message ID being edited
+        let currentActionTarget = { uid: null, messageId: null, actionType: null, newRole: null, targetPhotoUid: null }; // For general action confirmation
+
+        // Private Chat State
+        let currentPrivateChatTargetUid = null; // UID of the user currently chatting privately with
+        let currentPrivateChatTargetDisplayName = null; // Display name of the private chat user
+        let currentMessageListenerRef = null; // To keep track of the currently active Firebase ref for messages (public or private)
+        let unreadPrivateChats = {}; // { uid: true, uid2: true, ... } to track who sent unread private messages
+
+        // Firebase Listeners for current user's private messages
+        let privateMessageInboxListenerRef = null; // Listener for *all* incoming private messages to currentUser
+
+        const DEFAULT_PROFILE_PIC = "https://www.gravatar.com/avatar/?d=mp&s=100"; // Default generic image
+        const IRAQ_CRAFT_BOT = {
+            uid: "IRAQ_CRAFT_BOT_UID", // Unique ID for the bot
+            displayName: "IRAQ.CRAFT",
+            photoURL: "https://d.top4top.io/p_3437coa631.jpg" // Your bot's image
+        };
+
+        const ROLE_ORDER = { 'member': 1, 'admin': 2, 'owner': 3 }; // ترتيب الصلاحيات
+
+        // --- Error/Success Handling Function ---
+        function showCustomModal(title, message, isError = true) {
+            errorModalTitle.textContent = title;
+            errorModalMessage.textContent = message;
+            if (isError) {
+                errorModalTitle.style.color = 'var(--error-color)';
+                errorModalTitle.style.borderBottomColor = 'var(--error-color)';
+                okErrorButton.style.backgroundColor = 'var(--error-color)';
+            } else {
+                // For success messages, use a different color or default
+                errorModalTitle.style.color = 'var(--button-bg)'; // Example: use button color for success title
+                errorModalTitle.style.borderBottomColor = 'var(--button-bg)';
+                okErrorButton.style.backgroundColor = 'var(--button-bg)';
+            }
+            errorModal.style.display = 'flex';
+        }
+
+        // Centralized Firebase Error Handler
+        function handleFirebaseError(error) {
+            let errorMessage = "حدث خطأ غير معروف. يرجى المحاولة مرة أخرى.";
+            switch (error.code) {
+                case "auth/email-already-in-use":
+                    errorMessage = "البريد الإلكتروني هذا مستخدم بالفعل. يرجى استخدام بريد إلكتروني آخر.";
+                    break;
+                case "auth/invalid-email":
+                    errorMessage = "صيغة البريد الإلكتروني غير صحيحة.";
+                    break;
+                case "auth/operation-not-allowed":
+                    errorMessage = "عملية تسجيل الدخول/التسجيل غير مسموح بها. يرجى مراجعة إعدادات Firebase.";
+                    break;
+                case "auth/weak-password":
+                    errorMessage = "كلمة المرور ضعيفة جدًا. يجب أن تتكون من 6 أحرف على الأقل.";
+                    break;
+                case "auth/user-not-found":
+                    errorMessage = "لا يوجد مستخدم بهذا البريد الإلكتروني.";
+                    break;
+                case "auth/wrong-password":
+                    errorMessage = "كلمة المرور غير صحيحة.";
+                    break;
+                case "auth/invalid-login-credentials":
+                    errorMessage = "بيانات تسجيل الدخول غير صالحة. يرجى التحقق من البريد الإلكتروني وكلمة المرور.";
+                    break;
+                case "auth/too-many-requests":
+                    errorMessage = "تم حظر الوصول إلى هذا الحساب مؤقتًا بسبب كثرة محاولات تسجيل الدخول الفاشلة. يرجى المحاولة لاحقًا.";
+                    break;
+                case "auth/network-request-failed":
+                    errorMessage = "فشل الاتصال بالشبكة. يرجى التحقق من اتصالك بالإنترنت.";
+                    break;
+                case "permission-denied":
+                    errorMessage = "ليس لديك الصلاحيات الكافية للقيام بهذا الإجراء. قد تكون قواعد أمان قاعدة البيانات تمنع الوصول.";
+                    break;
+                case "auth/requires-recent-login": 
+                    errorMessage = "يتطلب هذا الإجراء إعادة تسجيل الدخول لتأكيده لأسباب أمنية. يرجى تسجيل الخروج ثم الدخول مرة أخرى.";
+                    break;
+                default:
+                    errorMessage = `حدث خطأ: ${error.message || error.code}`;
+                    break;
+            }
+            showCustomModal("خطأ!", errorMessage, true);
+            console.error("Firebase Error:", error); 
+        }
+
+        // Event listeners for the custom error modal
+        closeErrorModal.addEventListener('click', () => {
+            errorModal.style.display = 'none';
+        });
+        okErrorButton.addEventListener('click', () => {
+            errorModal.style.display = 'none';
+        });
+
+
+        // --- Firebase Authentication (Email/Password) ---
+
+        registerForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const username = registerUsernameInput.value.trim();
+            const email = registerEmailInput.value.trim();
+            const password = registerPasswordInput.value.trim();
+
+            if (username.length < 3) {
+                showCustomModal("خطأ!", "اسم المستخدم يجب أن يكون 3 أحرف على الأقل.");
+                return;
+            }
+            if (password.length < 6) {
+                showCustomModal("خطأ!", "كلمة المرور يجب أن تتكون من 6 أحرف على الأقل.");
+                return;
+            }
+
+            try {
+                const userCredential = await auth.createUserWithEmailAndPassword(email, password);
+                const user = userCredential.user;
+
+                await database.ref('users/' + user.uid).set({
+                    displayName: username,
+                    photoURL: DEFAULT_PROFILE_PIC,
+                    email: email,
+                    role: 'member', 
+                    isBlocked: false,
+                    isMuted: false,
+                    isLimited: false,
+                    limitEndTime: null,
+                    joinedAt: firebase.database.ServerValue.TIMESTAMP
+                });
+
+                showCustomModal("نجاح!", "تم إنشاء الحساب بنجاح! يمكنك الآن تسجيل الدخول.", false);
+                registerForm.style.display = 'none';
+                loginForm.style.display = 'flex'; 
+                registerUsernameInput.value = '';
+                registerEmailInput.value = '';
+                registerPasswordInput.value = '';
+            } catch (error) {
+                handleFirebaseError(error); 
+            }
+        });
+
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = loginEmailInput.value.trim();
+            const password = loginPasswordInput.value.trim();
+
+            try {
+                await auth.signInWithEmailAndPassword(email, password);
+                // Auth state change listener will handle UI switch
+            } catch (error) {
+                handleFirebaseError(error); 
+            }
+        });
+
+        toggleToLoginButton.addEventListener('click', () => {
+            registerForm.style.display = 'none';
+            loginForm.style.display = 'flex';
+        });
+
+        toggleToRegisterButton.addEventListener('click', () => {
+            loginForm.style.display = 'none';
+            registerForm.style.display = 'flex';
+        });
+
+        // Logout
+        logoutButton.addEventListener('click', async () => {
+            try {
+                await auth.signOut();
+                showCustomModal("تسجيل الخروج", "تم تسجيل الخروج بنجاح.", false);
+            } catch (error) {
+                handleFirebaseError(error); 
+            }
+        });
+
+        // Auth State Changed Listener
+        auth.onAuthStateChanged(async (user) => {
+            if (user) {
+                currentUser = user;
+                loginScreen.style.display = 'none';
+                chatScreen.style.display = 'flex';
+                
+                // --- NEW: Listen for ALL users data immediately upon login ---
+                database.ref('users').on('value', (snapshot) => {
+                    allUsersData = snapshot.val() || {};
+                    // If public chat is currently loaded, re-render messages to show badges
+                    if (!currentPrivateChatTargetUid) {
+                        // Detach, clear, and re-attach messages to ensure updated badges are displayed
+                        detachCurrentMessageListener(); 
+                        currentMessageListenerRef = database.ref('messages');
+                        attachMessageListeners(currentMessageListenerRef);
+                    } else {
+                        // If in private chat, just ensure current user's info is updated
+                        const currentUserDbData = allUsersData[currentUser.uid];
+                        if (currentUserDbData) {
+                            currentUserRole = currentUserDbData.role || 'member';
+                            userName.textContent = currentUserDbData.displayName || currentUser.displayName;
+                            userAvatar.src = currentUserDbData.photoURL || currentUserDbData.photoURL || DEFAULT_PROFILE_PIC;
+                        }
+                    }
+                    updateUserListUnreadIndicator(); // Ensure indicator is updated if users are blocked/muted
+                });
+                // --- END NEW BLOCK ---
+
+                const userRef = database.ref('users/' + currentUser.uid);
+                userRef.once('value').then(snapshot => {
+                    const data = snapshot.val();
+                    if (!data) {
+                         // If user data not found, initialize it (important for new registrations)
+                        userRef.set({
+                            displayName: currentUser.displayName || (currentUser.email ? currentUser.email.split('@')[0] : 'مستخدم جديد'), 
+                            photoURL: currentUser.photoURL || DEFAULT_PROFILE_PIC,
+                            email: currentUser.email,
+                            role: 'member', 
+                            isBlocked: false,
+                            isMuted: false,
+                            isLimited: false,
+                            limitEndTime: null,
+                            joinedAt: firebase.database.ServerValue.TIMESTAMP
+                        }).catch(error => {
+                            handleFirebaseError(error);
+                        });
+                    }
+                    // Attach onValue listener after initial data is confirmed/set
+                    userRef.on('value', (userSnapshot) => {
+                        const updatedData = userSnapshot.val();
+                        if (updatedData) {
+                            currentUserRole = updatedData.role || 'member';
+                            userName.textContent = updatedData.displayName || currentUser.displayName;
+                            userAvatar.src = updatedData.photoURL || currentUser.photoURL || DEFAULT_PROFILE_PIC;
+
+                            if (updatedData.isBlocked) {
+                                sendButton.disabled = true;
+                                messageInput.disabled = true;
+                                messageInput.placeholder = "لقد تم حظرك من إرسال الرسائل.";
+                            } else if (updatedData.isLimited && updatedData.limitEndTime && Date.now() < updatedData.limitEndTime) {
+                                sendButton.disabled = true;
+                                messageInput.disabled = true;
+                                const timeLeftMs = updatedData.limitEndTime - Date.now();
+                                if (timeLeftMs > 0) {
+                                    const hours = Math.floor(timeLeftMs / (1000 * 60 * 60));
+                                    const minutes = Math.floor((timeLeftMs % (1000 * 60 * 60)) / (1000 * 60));
+                                    const seconds = Math.floor((timeLeftMs % (1000 * 60)) / 1000);
+                                    const timeLeftFormatted = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                                    messageInput.placeholder = `أنت مقيد حتى ${new Date(updatedData.limitEndTime).toLocaleTimeString()} (${timeLeftFormatted} متبقي).`;
+                                } else {
+                                    database.ref('users/' + currentUser.uid).update({ isLimited: false, limitEndTime: null });
+                                    sendButton.disabled = false;
+                                    messageInput.disabled = false;
+                                    messageInput.placeholder = "اكتب رسالتك هنا...";
+                                }
+
+                            } else {
+                                sendButton.disabled = false;
+                                messageInput.disabled = false;
+                                messageInput.placeholder = "اكتب رسالتك هنا...";
+                            }
+                        } else {
+                             // User data somehow disappeared, force logout or re-init (rare)
+                             auth.signOut();
+                        }
+                    });
+                }).catch(error => {
+                    handleFirebaseError(error);
+                });
+
+                // Start listening for incoming private messages
+                setupPrivateMessageInboxListener();
+                // Initially load public chat messages
+                loadPublicMessages();
+            } else {
+                currentUser = null;
+                loginScreen.style.display = 'flex';
+                chatScreen.style.display = 'none';
+                messagesContainer.innerHTML = '';
+                // Detach Firebase listeners when user logs out
+                if (currentMessageListenerRef) {
+                    currentMessageListenerRef.off();
+                }
+                if (privateMessageInboxListenerRef) { // Detach private inbox listener
+                    privateMessageInboxListenerRef.off();
+                }
+                // --- NEW: Detach allUsersData listener on logout ---
+                database.ref('users').off(); 
+                allUsersData = {}; // Clear cached data
+                // --- END NEW ---
+                // Detach user data listener too
+                if (auth.currentUser) { 
+                    database.ref('users/' + auth.currentUser.uid).off();
+                }
+
+                replyingToMessage = null;
+                editingMessageId = null;
+                replyPreviewContainer.style.display = 'none';
+                sendButton.innerHTML = '<i class="fas fa-paper-plane"></i>';
+                currentPrivateChatTargetUid = null;
+                currentPrivateChatTargetDisplayName = null;
+                chatModeIndicator.textContent = "الشات العام";
+                chatModeIndicator.classList.remove('private-chat');
+                publicChatButton.style.display = 'none';
+                unreadPrivateChats = {}; // Clear unread messages on logout
+                updateUserListUnreadIndicator(); // Hide global unread indicator
+
+                registerForm.style.display = 'none';
+                loginForm.style.display = 'flex';
+            }
+        });
+
+        // --- NEW: Private Message Inbox Listener ---
+        function setupPrivateMessageInboxListener() {
+            if (!currentUser) return;
+
+            // Detach previous listener if exists
+            if (privateMessageInboxListenerRef) {
+                privateMessageInboxListenerRef.off();
+            }
+
+            // We listen for changes to private chat paths where currentUser.uid is part of the ID.
+            // This listener must be broad enough to catch new private chats or new messages in existing ones.
+            // For simplicity and security, we only listen for 'child_added' on the message list
+            // for chats *this user is part of* to flag unread.
+            
+            // This is a more refined approach to listen for UNREAD messages.
+            // It monitors *all* private chats the user is part of, checking the last message.
+            privateMessageInboxListenerRef = database.ref('private_messages');
+            privateMessageInboxListenerRef.on('child_added', (chatSnapshot) => {
+                const chatId = chatSnapshot.key;
+                const members = chatId.split('_');
+                const selfUid = currentUser.uid;
+
+                // Check if this chat involves the current user and is not a "bot" chat (if applicable)
+                if ((members[0] === selfUid || members[1] === selfUid) && !members.includes(IRAQ_CRAFT_BOT.uid)) {
+                    const otherUid = members[0] === selfUid ? members[1] : members[0];
+
+                    // Listen only for the last message in this specific private chat
+                    // This listener will be created for each private chat the user is part of.
+                    // This might become inefficient with many private chats.
+                    // A better approach for scale would be a /users/{uid}/unreadCount/{otherUid} node
+                    // updated by a Firebase Function.
+                    chatSnapshot.ref.limitToLast(1).on('child_added', (messageSnap) => {
+                        const message = messageSnap.val();
+                        // Only count as unread if:
+                        // 1. It's not a message sent by myself
+                        // 2. I'm not currently viewing this specific private chat
+                        // 3. The modal isn't open (meaning I'm not viewing any private chats)
+                        if (message.uid !== selfUid && 
+                            (currentPrivateChatTargetUid !== otherUid || userListModal.style.display === 'flex')) {
+                            
+                            // To prevent false positives if just logged in and message was already there
+                            // (requires storing last read timestamp, which is complex)
+                            // For simplicity, we just mark it as unread if it's from someone else and not current chat.
+                            unreadPrivateChats[otherUid] = true;
+                            updateUserListUnreadIndicator();
+                        }
+                    });
+                }
+            });
+
+            // Listen for child_changed to update unread status if a message in an existing chat is changed
+            // This is less common for unread tracking but can be useful.
+            // Simplified: The child_added listener on limitToLast(1) covers new messages
+            // and the displayMessage function updates based on current user data.
+        }
+
+        function updateUserListUnreadIndicator() {
+            const hasUnread = Object.keys(unreadPrivateChats).some(uid => unreadPrivateChats[uid]);
+            if (hasUnread) {
+                userListUnreadIndicator.style.display = 'block';
+            } else {
+                userListUnreadIndicator.style.display = 'none';
+            }
+        }
+
+        // --- Chat Functionality ---
+
+        sendButton.addEventListener('click', sendMessage);
+        messageInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+
+        async function sendMessage() {
+            if (!currentUser) {
+                showCustomModal("خطأ!", "يجب عليك تسجيل الدخول لإرسال الرسائل.");
+                return;
+            }
+
+            const messageText = messageInput.value.trim();
+            if (messageText === '') return;
+
+            const userRef = database.ref('users/' + currentUser.uid);
+            const userSnapshot = await userRef.once('value');
+            const userData = userSnapshot.val();
+
+            if (userData && (userData.isBlocked || (userData.isLimited && userData.limitEndTime && Date.now() < userData.limitEndTime))) {
+                messageInput.value = ''; 
+                showCustomModal("تنبيه!", "لا يمكنك إرسال الرسائل حالياً بسبب القيود المفروضة عليك.");
+                return;
+            }
+
+            if (editingMessageId) {
+                let messagePath;
+                if (currentPrivateChatTargetUid) {
+                    messagePath = `private_messages/${getPrivateChatId(currentUser.uid, currentPrivateChatTargetUid)}/${editingMessageId}`;
+                } else {
+                    messagePath = `messages/${editingMessageId}`;
+                }
+                
+                try {
+                    await database.ref(messagePath).update({
+                        text: messageText,
+                        edited: true,
+                    });
+                    editingMessageId = null;
+                    messageInput.value = '';
+                    sendButton.innerHTML = '<i class="fas fa-paper-plane"></i>';
+                } catch (error) {
+                    handleFirebaseError(error);
+                }
+                return;
+            }
+
+            const messageData = {
+                uid: currentUser.uid,
+                displayName: userData.displayName || currentUser.displayName,
+                photoURL: userData.photoURL || currentUser.photoURL || DEFAULT_PROFILE_PIC,
+                text: messageText,
+                timestamp: firebase.database.ServerValue.TIMESTAMP,
+                isMuted: userData.isMuted || false, 
+                isLimited: (userData.isLimited && userData.limitEndTime && Date.now() < userData.limitEndTime) || false 
+            };
+
+            if (replyingToMessage) {
+                messageData.replyTo = {
+                    messageId: replyingToMessage.messageId,
+                    uid: replyingToMessage.uid,
+                    displayName: replyingToMessage.displayName,
+                    text: replyingToMessage.text
+                };
+                replyingToMessage = null;
+                replyPreviewContainer.style.display = 'none';
+            }
+
+            let messageDbRef;
+            if (currentPrivateChatTargetUid) {
+                const privateChatId = getPrivateChatId(currentUser.uid, currentPrivateChatTargetUid);
+                messageDbRef = database.ref(`private_messages/${privateChatId}`);
+            } else {
+                messageDbRef = database.ref('messages');
+            }
+
+            try {
+                await messageDbRef.push(messageData);
+                messageInput.value = '';
+                scrollToBottom();
+            } catch (error) {
+                handleFirebaseError(error);
+            }
+        }
+
+        // --- Message Loading Functions (Public & Private) ---
+        const messagesAdded = new Set(); 
+
+        function detachCurrentMessageListener() {
+            if (currentMessageListenerRef) {
+                currentMessageListenerRef.off(); 
+            }
+            messagesContainer.innerHTML = '';
+            messagesAdded.clear();
+        }
+
+        async function loadPublicMessages() {
+            detachCurrentMessageListener();
+            chatModeIndicator.textContent = "الشات العام";
+            chatModeIndicator.classList.remove('private-chat');
+            publicChatButton.style.display = 'none';
+            currentPrivateChatTargetUid = null;
+            currentPrivateChatTargetDisplayName = null;
+
+            currentMessageListenerRef = database.ref('messages'); 
+            attachMessageListeners(currentMessageListenerRef);
+        }
+
+        async function loadPrivateMessages(targetUid, targetDisplayName) {
+            if (!currentUser || !targetUid || !targetDisplayName || currentUser.uid === targetUid) {
+                showCustomModal("خطأ!", "لا يمكن بدء محادثة خاصة غير صالحة.");
+                return;
+            }
+            
+            detachCurrentMessageListener();
+
+            currentPrivateChatTargetUid = targetUid;
+            currentPrivateChatTargetDisplayName = targetDisplayName;
+            chatModeIndicator.textContent = `خاص مع ${targetDisplayName}`;
+            chatModeIndicator.classList.add('private-chat');
+            publicChatButton.style.display = 'flex'; 
+
+            // Mark messages from this user as read
+            if (unreadPrivateChats[targetUid]) {
+                delete unreadPrivateChats[targetUid];
+                updateUserListUnreadIndicator(); // Update the main indicator
+            }
+
+            const privateChatId = getPrivateChatId(currentUser.uid, targetUid);
+            currentMessageListenerRef = database.ref(`private_messages/${privateChatId}`); 
+            attachMessageListeners(currentMessageListenerRef);
+        }
+
+        // Reusable function to attach listeners to any message reference
+        function attachMessageListeners(messageRef) {
+            messageRef.orderByChild('timestamp').on('child_added', async (snapshot) => {
+                const message = snapshot.val();
+                const messageId = snapshot.key;
+                if (!messagesAdded.has(messageId)) {
+                    messagesAdded.add(messageId);
+                    await displayMessage(message, messageId);
+                    scrollToBottom();
+                }
+            });
+            messageRef.on('child_changed', async (snapshot) => {
+                const message = snapshot.val();
+                const messageId = snapshot.key;
+                const existingMessageElement = document.querySelector(`.message[data-message-id="${messageId}"]`);
+                if (existingMessageElement) {
+                    existingMessageElement.remove();
+                    messagesAdded.delete(messageId);
+                    await displayMessage(message, messageId);
+                    scrollToBottom();
+                }
+            });
+            messageRef.on('child_removed', (snapshot) => {
+                const messageId = snapshot.key;
+                const existingMessageElement = document.querySelector(`.message[data-message-id="${messageId}"]`);
+                if (existingMessageElement) {
+                    existingMessageElement.remove();
+                    messagesAdded.delete(messageId);
+                }
+            });
+        }
+
+
+        // Helper to generate a consistent private chat ID
+        function getPrivateChatId(uid1, uid2) {
+            return uid1 < uid2 ? `${uid1}_${uid2}` : `${uid2}_${uid1}`;
+        }
+
+        // Event listener for public chat button
+        publicChatButton.addEventListener('click', () => {
+            loadPublicMessages();
+        });
+
+
+        async function displayMessage(message, messageId) {
+            const messageElement = document.createElement('div');
+            messageElement.classList.add('message');
+            messageElement.setAttribute('data-message-id', messageId);
+
+            const isSelf = message.uid === currentUser?.uid;
+            const isBot = message.uid === IRAQ_CRAFT_BOT.uid;
+
+            if (isSelf) {
+                messageElement.classList.add('self');
+            } else {
+                messageElement.classList.add('other');
+            }
+
+            // Fetch sender's status and role from current user list data for accurate display
+            // Make sure allUsersData is populated before displaying messages
+            const senderData = allUsersData[message.uid]; 
+            const isBlockedByAdmin = senderData?.isBlocked || false;
+            const isMutedByAdmin = senderData?.isMuted || false;
+            const isLimitedByAdmin = (senderData?.isLimited && senderData?.limitEndTime && Date.now() < senderData.limitEndTime) || false;
+
+
+            if (isBlockedByAdmin) {
+                messageElement.classList.add('blocked');
+            }
+
+            const isEffectivelyMuted = isMutedByAdmin || message.isMuted;
+            if (isEffectivelyMuted) {
+                messageElement.classList.add('muted');
+            }
+
+            if (isLimitedByAdmin) {
+                messageElement.classList.add('limited');
+            }
+
+            const timestamp = new Date(message.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+            let senderRole = 'member';
+            let senderDisplayName = message.displayName;
+            let senderPhotoURL = message.photoURL;
+            let verifiedBadge = '';
+
+            if (!isBot) {
+                senderRole = senderData?.role || message.role || 'member'; // Use live role data if available
+                senderDisplayName = senderData?.displayName || message.displayName;
+                senderPhotoURL = senderData?.photoURL || message.photoURL || DEFAULT_PROFILE_PIC; 
+
+                if (senderRole === 'owner') {
+                    verifiedBadge = '<i class="fas fa-check-circle verified-badge badge-owner" title="المالك"></i>';
+                } else if (senderRole === 'admin') {
+                    verifiedBadge = '<i class="fas fa-check-circle verified-badge badge-admin" title="المشرف"></i>';
+                }
+
+            } else {
+                senderRole = 'bot';
+                senderDisplayName = IRAQ_CRAFT_BOT.displayName;
+                senderPhotoURL = IRAQ_CRAFT_BOT.photoURL;
+            }
+
+
+            let usernameDisplay = senderDisplayName;
+
+            let replyQuoteHtml = '';
+            if (message.replyTo && message.replyTo.messageId) {
+                const quotedUserDisplayName = message.replyTo.displayName || 'مستخدم غير معروف';
+                const quotedMessageText = message.replyTo.text || '';
+                replyQuoteHtml = `
+                    <div class="reply-quote">
+                        الرد على <span class="quoted-user">${quotedUserDisplayName}</span>: <span class="quoted-text">${quotedMessageText}</span>
+                    </div>
+                `;
+            }
+            
+            const editedTag = message.edited ? '<span style="font-size:0.7em; opacity:0.6;"> (مُعدلة)</span>' : '';
+
+            messageElement.innerHTML = `
+                ${!isSelf ? `<img class="message-avatar" src="${senderPhotoURL}" alt="${senderDisplayName}">` : ''}
+                <div class="message-content">
+                    <div class="message-info">
+                        <span class="username">${usernameDisplay} ${verifiedBadge}</span>
+                        <span class="timestamp">${timestamp}</span> ${editedTag}
+                    </div>
+                    ${replyQuoteHtml}
+                    <div class="message-text">${message.text}</div>
+                </div>
+                ${isSelf ? `<img class="message-avatar" src="${senderPhotoURL}" alt="${senderDisplayName}">` : ''}
+            `;
+
+            if (!isBot && !isBlockedByAdmin) { 
+                const messageContentDiv = messageElement.querySelector('.message-content');
+                const actionsDiv = document.createElement('div');
+                actionsDiv.classList.add('message-actions');
+
+                const replyButton = document.createElement('button');
+                replyButton.classList.add('message-action-button', 'reply');
+                replyButton.title = 'الرد على هذه الرسالة';
+                replyButton.innerHTML = '<i class="fas fa-reply"></i>';
+                replyButton.addEventListener('click', () => {
+                    startReplying(message, messageId);
+                });
+                actionsDiv.appendChild(replyButton);
+
+                if (isSelf) {
+                    const editButton = document.createElement('button');
+                    editButton.classList.add('message-action-button', 'edit');
+                    editButton.title = 'تعديل الرسالة';
+                    editButton.innerHTML = '<i class="fas fa-edit"></i>';
+                    editButton.addEventListener('click', () => {
+                        startEditing(message, messageId);
+                    });
+                    actionsDiv.appendChild(editButton);
+                }
+
+                if (isSelf || currentUserRole === 'admin' || currentUserRole === 'owner') {
+                    const deleteButton = document.createElement('button');
+                    deleteButton.classList.add('message-action-button', 'delete');
+                    deleteButton.title = 'حذف الرسالة';
+                    deleteButton.innerHTML = '<i class="fas fa-trash"></i>';
+                    deleteButton.addEventListener('click', () => {
+                        showConfirmationModalForMessageAction(messageId, 'delete', message.displayName, message.text);
+                    });
+                    actionsDiv.appendChild(deleteButton);
+                }
+
+                const targetUserRoleOrder = ROLE_ORDER[senderRole];
+                const currentUserRoleOrder = ROLE_ORDER[currentUserRole];
+
+                if (!isSelf && (currentUserRole === 'admin' || currentUserRole === 'owner') && currentUserRoleOrder > targetUserRoleOrder) {
+                    const muteButton = document.createElement('button');
+                    muteButton.classList.add('message-action-button', 'mute');
+                    muteButton.title = isMutedByAdmin ? 'إلغاء الكتم' : 'كتم';
+                    muteButton.innerHTML = isMutedByAdmin ? '<i class="fas fa-volume-up"></i>' : '<i class="fas fa-volume-mute"></i>';
+                    muteButton.addEventListener('click', () => {
+                        showConfirmationModalForUserAction(message.uid, 'mute', isMutedByAdmin, senderDisplayName);
+                    });
+                    actionsDiv.appendChild(muteButton);
+
+                    if (currentUserRole === 'owner') {
+                        const blockButton = document.createElement('button');
+                        blockButton.classList.add('message-action-button', 'block');
+                        blockButton.title = isBlockedByAdmin ? 'إلغاء الحظر' : 'حظر';
+                        blockButton.innerHTML = isBlockedByAdmin ? '<i class="fas fa-user-check"></i>' : '<i class="fas fa-user-slash"></i>';
+                        blockButton.addEventListener('click', () => {
+                            showConfirmationModalForUserAction(message.uid, 'block', isBlockedByAdmin, senderDisplayName);
+                        });
+                        actionsDiv.appendChild(blockButton);
+
+                        const limitButton = document.createElement('button');
+                        limitButton.classList.add('message-action-button', 'limit');
+                        limitButton.title = isLimitedByAdmin ? 'إلغاء التقييد' : 'تقييد';
+                        limitButton.innerHTML = isLimitedByAdmin ? '<i class="fas fa-unlock"></i>' : '<i class="fas fa-hourglass-half"></i>';
+                        limitButton.addEventListener('click', async () => {
+                            if (isLimitedByAdmin) {
+                                await performUserAction(message.uid, 'limit', false);
+                            } else {
+                                showLimitUserModal(message.uid, senderDisplayName);
+                            }
+                        });
+                        actionsDiv.appendChild(limitButton);
+
+                        if (targetUserRoleOrder < ROLE_ORDER['owner']) {
+                            const setAdminButton = document.createElement('button');
+                            setAdminButton.classList.add('message-action-button', 'set-admin');
+                            setAdminButton.title = senderRole === 'admin' ? 'إزالة المشرف' : 'تعيين مشرف';
+                            setAdminButton.innerHTML = senderRole === 'admin' ? '<i class="fas fa-user-minus"></i>' : '<i class="fas fa-user-plus"></i>';
+                            setAdminButton.addEventListener('click', () => {
+                                showConfirmationModalForUserAction(message.uid, 'setRole', senderRole === 'admin' ? 'member' : 'admin', senderDisplayName);
+                            });
+                            actionsDiv.appendChild(setAdminButton);
+                        }
+                    }
+                }
+                messageContentDiv.appendChild(actionsDiv);
+            }
+
+            messagesContainer.appendChild(messageElement);
+        }
+
+        function scrollToBottom() {
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        function startReplying(message, messageId) {
+            if (editingMessageId) {
+                editingMessageId = null;
+                sendButton.innerHTML = '<i class="fas fa-paper-plane"></i>';
+            }
+            replyingToMessage = {
+                messageId: messageId,
+                uid: message.uid,
+                displayName: message.displayName,
+                text: message.text
+            };
+            replyPreviewContent.querySelector('.quoted-user').textContent = message.displayName;
+            replyPreviewContent.querySelector('.quoted-text').textContent = message.text;
+            replyPreviewContainer.style.display = 'flex';
+            messageInput.focus();
+        }
+
+        clearReplyButton.addEventListener('click', () => {
+            replyingToMessage = null;
+            replyPreviewContainer.style.display = 'none';
+        });
+
+        function startEditing(message, messageId) {
+            const currentTime = Date.now();
+            const messageTime = message.timestamp;
+            const fiveMinutes = 5 * 60 * 1000;
+
+            if (currentTime - messageTime > fiveMinutes) {
+                showCustomModal("خطأ!", "لا يمكنك تعديل هذه الرسالة لأنها تجاوزت مدة التعديل المسموحة (5 دقائق).");
+                return;
+            }
+            if (replyingToMessage) {
+                replyingToMessage = null;
+                replyPreviewContainer.style.display = 'none';
+            }
+            editingMessageId = messageId;
+            messageInput.value = message.text;
+            sendButton.innerHTML = '<i class="fas fa-edit"></i>';
+            messageInput.focus();
+        }
+
+        async function deleteMessage(messageId) {
+            let messagePath;
+            if (currentPrivateChatTargetUid) {
+                messagePath = `private_messages/${getPrivateChatId(currentUser.uid, currentPrivateChatTargetUid)}/${messageId}`;
+            } else {
+                messagePath = `messages/${messageId}`;
+            }
+            try {
+                await database.ref(messagePath).remove();
+            } catch (error) {
+                handleFirebaseError(error);
+            }
+        }
+
+
+        // --- User List and Moderation ---
+
+        userListButton.addEventListener('click', async () => {
+            if (!currentUser) {
+                showCustomModal("خطأ!", "يرجى تسجيل الدخول لعرض قائمة المستخدمين.");
+                return;
+            }
+            userListSearchInput.value = ''; // Clear search input on modal open
+            await loadUserList(); // Reload the user list to update unread indicators on list items
+            userListModal.style.display = 'flex';
+        });
+
+        closeUserListModal.addEventListener('click', () => {
+            userListModal.style.display = 'none';
+        });
+
+        closeUserActionModal.addEventListener('click', () => {
+            userActionModal.style.display = 'none';
+            currentActionTarget = { uid: null, messageId: null, actionType: null, newRole: null, targetPhotoUid: null };
+        });
+
+        cancelActionButton.addEventListener('click', () => {
+            userActionModal.style.display = 'none';
+            currentActionTarget = { uid: null, messageId: null, actionType: null, newRole: null, targetPhotoUid: null };
+        });
+
+        closeLimitUserModal.addEventListener('click', () => {
+            limitUserModal.style.display = 'none';
+            currentActionTarget = { uid: null, messageId: null, actionType: null, newRole: null, targetPhotoUid: null };
+        });
+
+        cancelLimitButton.addEventListener('click', () => {
+            limitUserModal.style.display = 'none';
+            currentActionTarget = { uid: null, messageId: null, actionType: null, newRole: null, targetPhotoUid: null };
+        });
+
+        confirmLimitButton.addEventListener('click', async () => {
+            if (!currentActionTarget.uid) return;
+
+            const durationValue = parseInt(limitDurationValueInput.value);
+            const durationUnit = limitDurationUnitSelect.value;
+
+            if (isNaN(durationValue) || durationValue <= 0) {
+                showCustomModal("خطأ!", "يرجى إدخال مدة تقييد صحيحة.");
+                return;
+            }
+
+            let durationMs = 0;
+            switch (durationUnit) {
+                case 'minutes': durationMs = durationValue * 60 * 1000; break;
+                case 'hours': durationMs = durationValue * 60 * 60 * 1000; break;
+                case 'days': durationMs = durationValue * 24 * 60 * 60 * 1000; break;
+            }
+
+            const limitEndTime = Date.now() + durationMs;
+
+            await performUserAction(currentActionTarget.uid, 'limit', true, null, limitEndTime);
+            limitUserModal.style.display = 'none';
+            currentActionTarget = { uid: null, messageId: null, actionType: null, newRole: null, targetPhotoUid: null };
+        });
+
+        async function loadUserList(searchTerm = '') {
+            userListUl.innerHTML = '';
+            // No need to fetch users here again, allUsersData is globally updated
+            // const usersRef = database.ref('users');
+            // const snapshot = await usersRef.once('value');
+            // allUsersData = snapshot.val(); // Store all user data - This is now handled globally
+
+            if (allUsersData) {
+                const filteredUids = Object.keys(allUsersData).filter(uid => {
+                    if (uid === IRAQ_CRAFT_BOT.uid) return false; // Exclude bot from user list
+                    const userData = allUsersData[uid];
+                    const displayName = userData?.displayName || '';
+                    return displayName.toLowerCase().includes(searchTerm.toLowerCase());
+                });
+
+                const sortedUids = filteredUids.sort((uidA, uidB) => {
+                    const roleA = allUsersData[uidA]?.role || 'member';
+                    const roleB = allUsersData[uidB]?.role || 'member';
+
+                    if (ROLE_ORDER[roleA] !== ROLE_ORDER[roleB]) {
+                        return ROLE_ORDER[roleB] - ROLE_ORDER[roleA]; // Sort by role (owner > admin > member)
+                    }
+                    const nameA = allUsersData[uidA]?.displayName || '';
+                    const nameB = allUsersData[uidB]?.displayName || '';
+                    return nameA.localeCompare(nameB); // Then by name
+                });
+
+                for (const uid of sortedUids) {
+                    const userData = allUsersData[uid];
+                    if (!userData) continue;
+
+                    const listItem = document.createElement('li');
+                    listItem.setAttribute('data-uid', uid);
+
+                    let roleDisplay = userData.role || 'member';
+                    let roleClass = '';
+                    if (roleDisplay === 'admin') roleClass = 'role-admin';
+                    if (roleDisplay === 'owner') roleClass = 'role-owner';
+
+                    let verifiedBadge = '';
+                    if (roleDisplay === 'owner') {
+                        verifiedBadge = '<i class="fas fa-check-circle verified-badge badge-owner" title="المالك"></i>';
+                    } else if (roleDisplay === 'admin') {
+                        verifiedBadge = '<i class="fas fa-check-circle verified-badge badge-admin" title="المشرف"></i>';
+                    }
+
+                    let statusIndicators = [];
+                    if (userData.isBlocked) statusIndicators.push('<span class="status-indicator blocked">(محظور)</span>');
+                    if (userData.isMuted) statusIndicators.push('<span class="status-indicator muted">(مكتوم)</span>');
+                    if (userData.isLimited && userData.limitEndTime && Date.now() < userData.limitEndTime) {
+                        const timeLeftMs = userData.limitEndTime - Date.now();
+                        if (timeLeftMs > 0) {
+                            const hours = Math.floor(timeLeftMs / (1000 * 60 * 60));
+                            const minutes = Math.floor((timeLeftMs % (1000 * 60 * 60)) / (1000 * 60));
+                            const seconds = Math.floor((timeLeftMs % (1000 * 60)) / 1000);
+                            const timeLeftFormatted = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                            statusIndicators.push(`<span class="status-indicator limited">(مقيد: ${timeLeftFormatted})</span>`);
+                        } else {
+                            database.ref('users/' + uid).update({ isLimited: false, limitEndTime: null });
+                        }
+                    }
+                    const statusHtml = statusIndicators.join(' ');
+
+                    // Check for unread private messages from this user and add inline badge
+                    const unreadBadge = unreadPrivateChats[uid] ? '<span class="unread-indicator-inline">جديد</span>' : '';
+
+                    listItem.innerHTML = `
+                        <img class="user-avatar" src="${userData.photoURL || DEFAULT_PROFILE_PIC}" alt="${userData.displayName}">
+                        <div class="user-details">
+                            <div class="user-name">${userData.displayName} ${verifiedBadge} ${unreadBadge} ${statusHtml}</div>
+                            <div class="user-role ${roleClass}">${roleDisplay === 'member' ? 'عضو' : roleDisplay === 'admin' ? 'مشرف' : 'مالك'}</div>
+                        </div>
+                        <div class="user-actions"></div>
+                    `;
+
+                    const userActionsDiv = listItem.querySelector('.user-actions');
+
+                    const targetUserRoleOrder = ROLE_ORDER[userData.role || 'member'];
+                    const currentUserRoleOrder = ROLE_ORDER[currentUserRole];
+
+                    if (uid !== currentUser.uid) { 
+                        // Private Chat Button (NEW)
+                        const privateChatButton = document.createElement('button');
+                        privateChatButton.classList.add('private-chat-button');
+                        privateChatButton.textContent = 'مراسلة خاصة';
+                        privateChatButton.title = `بدء محادثة خاصة مع ${userData.displayName}`;
+                        privateChatButton.addEventListener('click', () => {
+                            userListModal.style.display = 'none'; 
+                            loadPrivateMessages(uid, userData.displayName);
+                        });
+                        userActionsDiv.appendChild(privateChatButton);
+
+                        // Mute/Unmute logic: Owner can mute anyone, Admin can mute members
+                        if ((currentUserRole === 'owner') || (currentUserRole === 'admin' && userData.role === 'member')) {
+                            const muteButton = document.createElement('button');
+                            muteButton.classList.add('mute');
+                            muteButton.textContent = userData.isMuted ? 'إلغاء الكتم' : 'كتم';
+                            muteButton.title = userData.isMuted ? 'إلغاء كتم هذا المستخدم' : 'كتم هذا المستخدم';
+                            muteButton.addEventListener('click', () => {
+                                showConfirmationModalForUserAction(uid, 'mute', userData.isMuted, userData.displayName);
+                            });
+                            userActionsDiv.appendChild(muteButton);
+                        }
+
+                        if (currentUserRole === 'owner') {
+                            // Block/Unblock button (Owner only, for anyone below owner)
+                            if (targetUserRoleOrder < ROLE_ORDER['owner']) {
+                                const blockButton = document.createElement('button');
+                                blockButton.classList.add('block');
+                                blockButton.textContent = userData.isBlocked ? 'إلغاء الحظر' : 'حظر';
+                                blockButton.title = userData.isBlocked ? 'إلغاء حظر هذا المستخدم' : 'حظر هذا المستخدم من الشات';
+                                blockButton.addEventListener('click', () => {
+                                    showConfirmationModalForUserAction(uid, 'block', userData.isBlocked, userData.displayName);
+                                });
+                                userActionsDiv.appendChild(blockButton);
+                            }
+
+                            // Limit/Unlimit button (Owner only, for anyone below owner)
+                            if (targetUserRoleOrder < ROLE_ORDER['owner']) {
+                                const limitButton = document.createElement('button');
+                                limitButton.classList.add('limit');
+                                limitButton.textContent = (userData.isLimited && userData.limitEndTime && Date.now() < userData.limitEndTime) ? 'إلغاء التقييد' : 'تقييد';
+                                limitButton.title = (userData.isLimited && userData.limitEndTime && Date.now() < userData.limitEndTime) ? 'إلغاء تقييد هذا المستخدم' : 'تقييد هذا المستخدم لفترة معينة';
+                                limitButton.addEventListener('click', async () => {
+                                    if (userData.isLimited && userData.limitEndTime && Date.now() < userData.limitEndTime) {
+                                        await performUserAction(uid, 'limit', false);
+                                    } else {
+                                        showLimitUserModal(uid, userData.displayName);
+                                    }
+                                });
+                                userActionsDiv.appendChild(limitButton);
+                            }
+
+                            // Set Role (Admin/Member) button (Owner only, for anyone below owner)
+                            if (targetUserRoleOrder < ROLE_ORDER['owner']) { 
+                                const setAdminButton = document.createElement('button');
+                                setAdminButton.classList.add('set-admin');
+                                setAdminButton.textContent = userData.role === 'admin' ? 'إزالة مشرف' : 'تعيين مشرف';
+                                setAdminButton.title = userData.role === 'admin' ? 'إزالة صلاحيات المشرف' : 'تعيين صلاحيات المشرف';
+                                setAdminButton.addEventListener('click', () => {
+                                    showConfirmationModalForUserAction(uid, 'setRole', userData.role === 'admin' ? 'member' : 'admin', userData.displayName);
+                                });
+                                userActionsDiv.appendChild(setAdminButton);
+                            }
+
+                            // Owner can change user's photo (for anyone below owner)
+                            if (targetUserRoleOrder < ROLE_ORDER['owner']) {
+                                const changePhotoButton = document.createElement('button');
+                                changePhotoButton.classList.add('change-photo');
+                                changePhotoButton.textContent = 'تغيير الصورة';
+                                changePhotoButton.title = 'تغيير صورة ملف هذا المستخدم';
+                                changePhotoButton.addEventListener('click', () => {
+                                    showChangeUserPhotoModal(uid, userData.displayName, userData.photoURL || DEFAULT_PROFILE_PIC);
+                                });
+                                userActionsDiv.appendChild(changePhotoButton);
+                            }
+
+                            // Delete Member Button (Owner only, for anyone below owner)
+                            if (targetUserRoleOrder < ROLE_ORDER['owner']) {
+                                const deleteMemberButton = document.createElement('button');
+                                deleteMemberButton.classList.add('delete-member');
+                                deleteMemberButton.textContent = 'حذف العضو';
+                                deleteMemberButton.title = 'حذف هذا العضو من الشات وقاعدة البيانات';
+                                deleteMemberButton.addEventListener('click', () => {
+                                    showConfirmationModalForUserAction(uid, 'deleteMember', false, userData.displayName);
+                                });
+                                userActionsDiv.appendChild(deleteMemberButton);
+                            }
+                        }
+                    }
+                    userListUl.appendChild(listItem);
+                }
+            }
+        }
+
+        // Add event listener for the search input
+        userListSearchInput.addEventListener('input', (e) => {
+            loadUserList(e.target.value.trim());
+        });
+
+
+        // --- Confirmation Modals ---
+        async function showConfirmationModalForUserAction(uid, actionType, isCurrentStatus, displayName) {
+            currentActionTarget = { uid: uid, actionType: actionType, newRole: null };
+            
+            let title = '';
+            let message = '';
+            let confirmBtnText = '';
+
+            const targetUserRef = database.ref('users/' + uid);
+            const targetUserSnapshot = await targetUserRef.once('value');
+            const targetUserData = targetUserSnapshot.val();
+            const targetUserRole = targetUserData?.role || 'member';
+
+            // Prevent Admins from managing Owners or other Admins
+            if (currentUserRole === 'admin' && (targetUserRole === 'owner' || targetUserRole === 'admin')) {
+                showCustomModal("خطأ!", "لا يمكنك إدارة مستخدم لديه نفس صلاحياتك أو صلاحيات أعلى.");
+                return;
+            }
+            // Prevent Owners from managing other Owners (unless a specific feature for that)
+            if (currentUserRole === 'owner' && targetUserRole === 'owner' && uid !== currentUser.uid) {
+                 showCustomModal("خطأ!", "لا يمكنك إدارة مالك آخر.");
+                 return;
+            }
+
+
+            if (actionType === 'block') {
+                title = isCurrentStatus ? 'إلغاء حظر المستخدم' : 'حظر المستخدم';
+                message = `هل أنت متأكد أنك تريد ${isCurrentStatus ? 'إلغاء حظر' : 'حظر'} **${displayName}**؟`;
+                confirmBtnText = isCurrentStatus ? 'تأكيد إلغاء الحظر' : 'تأكيد الحظر';
+                confirmActionButton.style.backgroundColor = isCurrentStatus ? '' : getComputedStyle(document.documentElement).getPropertyValue('--blocked-color').trim();
+            } else if (actionType === 'mute') {
+                title = isCurrentStatus ? 'إلغاء كتم المستخدم' : 'كتم المستخدم';
+                message = `هل أنت متأكد أنك تريد ${isCurrentStatus ? 'إلغاء كتم' : 'كتم'} **${displayName}**؟`;
+                confirmBtnText = isCurrentStatus ? 'تأكيد إلغاء الكتم' : 'تأكيد الكتم';
+                confirmActionButton.style.backgroundColor = isCurrentStatus ? '' : getComputedStyle(document.documentElement).getPropertyValue('--muted-color').trim();
+            } else if (actionType === 'setRole') {
+                const newRole = isCurrentStatus ? 'member' : 'admin';
+                title = `تغيير دور المستخدم`;
+                message = `هل أنت متأكد أنك تريد تعيين **${displayName}** كـ **${newRole === 'admin' ? 'مشرف' : 'عضو'}**؟`;
+                confirmBtnText = `تأكيد التعيين كـ ${newRole === 'admin' ? 'مشرف' : 'عضو'}`;
+                currentActionTarget.newRole = newRole;
+                confirmActionButton.style.backgroundColor = isCurrentStatus ? '' : getComputedStyle(document.documentElement).getPropertyValue('--set-admin-color').trim();
+            } else if (actionType === 'deleteMember') {
+                title = 'حذف العضو';
+                message = `هل أنت متأكد أنك تريد حذف العضو **${displayName}** بشكل دائم؟ سيؤدي هذا إلى إزالة حسابه وجميع رسائله.`;
+                confirmBtnText = 'تأكيد الحذف';
+                confirmActionButton.style.backgroundColor = getComputedStyle(document.documentElement).getPropertyValue('--delete-member-color').trim();
+            }
+
+            actionModalTitle.textContent = title;
+            actionModalMessage.innerHTML = message;
+            confirmActionButton.textContent = confirmBtnText;
+            
+            confirmActionButton.onclick = async () => {
+                userActionModal.style.display = 'none';
+                if (actionType === 'deleteMember') {
+                    await deleteMember(currentActionTarget.uid);
+                } else {
+                    const statusToSet = !isCurrentStatus;
+                    await performUserAction(currentActionTarget.uid, currentActionTarget.actionType, statusToSet, currentActionTarget.newRole);
+                }
+            };
+            userActionModal.style.display = 'flex';
+        }
+
+        async function showConfirmationModalForMessageAction(messageId, actionType, senderDisplayName, messageText) {
+            currentActionTarget = { messageId: messageId, actionType: actionType };
+
+            let title = '';
+            let message = '';
+
+            if (actionType === 'delete') {
+                title = 'حذف الرسالة';
+                message = `هل أنت متأكد أنك تريد حذف هذه الرسالة من **${senderDisplayName}**: <br>"${messageText}"؟`;
+            }
+
+            actionModalTitle.textContent = title;
+            actionModalMessage.innerHTML = message;
+            confirmActionButton.textContent = 'تأكيد الحذف';
+            const deleteColor = getComputedStyle(document.documentElement).getPropertyValue('--delete-message-color').trim();
+            confirmActionButton.style.backgroundColor = deleteColor;
+            confirmActionButton.onclick = async () => {
+                userActionModal.style.display = 'none';
+                await deleteMessage(currentActionTarget.messageId);
+            };
+            userActionModal.style.display = 'flex';
+        }
+
+        async function performUserAction(uid, actionType, status, newRole = null, limitEndTime = null) {
+            try {
+                const userRef = database.ref('users/' + uid);
+                let actionMessage = '';
+
+                if (actionType === 'block') {
+                    await userRef.update({ isBlocked: status });
+                    actionMessage = `تم ${status ? 'حظر' : 'إلغاء حظر'} المستخدم بنجاح.`;
+                } else if (actionType === 'mute') {
+                    await userRef.update({ isMuted: status });
+                    actionMessage = `تم ${status ? 'كتم' : 'إلغاء كتم'} المستخدم بنجاح.`;
+                } else if (actionType === 'limit') {
+                    await userRef.update({ isLimited: status, limitEndTime: status ? limitEndTime : null });
+                    actionMessage = `تم ${status ? 'تقييد' : 'إلغاء تقييد'} المستخدم بنجاح.`;
+                } else if (actionType === 'setRole' && newRole) {
+                    await userRef.update({ role: newRole });
+                    actionMessage = `تم تغيير دور المستخدم بنجاح إلى ${newRole === 'admin' ? 'مشرف' : 'عضو'}.`;
+                }
+                showCustomModal("نجاح!", actionMessage, false); 
+                currentActionTarget = { uid: null, messageId: null, actionType: null, newRole: null, targetPhotoUid: null };
+                await loadUserList(); 
+            } catch (error) {
+                handleFirebaseError(error);
+            }
+        }
+
+        async function deleteMember(uidToDelete) {
+            try {
+                // Delete user data from Realtime Database
+                await database.ref('users/' + uidToDelete).remove();
+                
+                // Optional: Delete all messages by this user (public chat)
+                const messagesRef = database.ref('messages');
+                messagesRef.orderByChild('uid').equalTo(uidToDelete).once('value').then(snapshot => {
+                    const updates = {};
+                    snapshot.forEach((child) => {
+                        updates[child.key] = null; 
+                    });
+                    if (Object.keys(updates).length > 0) {
+                        messagesRef.update(updates).catch(err => console.warn("Failed to delete public messages for user:", err));
+                    }
+                }).catch(err => console.warn("Failed to fetch public messages for deletion:", err));
+
+                // Delete private messages related to this user
+                const privateChatsRef = database.ref('private_messages');
+                privateChatsRef.once('value').then(snap => {
+                    const privateChatUpdates = {};
+                    snap.forEach(childSnap => {
+                        const chatId = childSnap.key;
+                        // Check if this chat ID involves the deleted user
+                        // This uses a string includes check, which is simpler but less robust than regex for guaranteed UID matching
+                        if (chatId.includes(uidToDelete)) { 
+                            privateChatUpdates[chatId] = null;
+                        }
+                    });
+                    if (Object.keys(privateChatUpdates).length > 0) {
+                        privateChatsRef.update(privateChatUpdates).catch(err => {
+                            console.warn("Could not delete some private chats for deleted user (permissions issue likely):", err);
+                        });
+                    }
+                }).catch(err => console.warn("Failed to fetch private chats for deletion:", err));
+
+                showCustomModal("نجاح!", `تم حذف العضو وجميع رسائله بنجاح.`, false);
+                await loadUserList(); 
+            } catch (error) {
+                handleFirebaseError(error);
+            }
+        }
+
+
+        function showLimitUserModal(uid, displayName) {
+            limitedUserNameSpan.textContent = displayName;
+            limitDurationValueInput.value = 1;
+            limitDurationUnitSelect.value = 'minutes';
+            limitUserModal.style.display = 'flex';
+            currentActionTarget = { uid: uid, displayName: displayName, actionType: 'limit' };
+        }
+
+
+        // --- Profile Editing (Self) ---
+        editProfileButton.addEventListener('click', async () => {
+            if (!currentUser) {
+                showCustomModal("خطأ!", "يرجى تسجيل الدخول لتعديل ملفك الشخصي.");
+                return;
+            }
+            const userRef = database.ref('users/' + currentUser.uid);
+            const snapshot = await userRef.once('value');
+            const userData = snapshot.val();
+
+            profileModalAvatar.src = userData.photoURL || currentUser.photoURL || DEFAULT_PROFILE_PIC;
+            profileDisplayNameInput.value = userData.displayName || currentUser.displayName;
+            profileModal.style.display = 'flex';
+        });
+
+        closeProfileModal.addEventListener('click', () => {
+            profileModal.style.display = 'none';
+        });
+
+        saveProfileButton.addEventListener('click', async () => {
+            if (!currentUser) return;
+
+            const newDisplayName = profileDisplayNameInput.value.trim();
+
+            if (newDisplayName === '') {
+                showCustomModal("خطأ!", "اسم العرض لا يمكن أن يكون فارغًا.");
+                return;
+            }
+
+            try {
+                const userRef = database.ref('users/' + currentUser.uid);
+                const updates = { displayName: newDisplayName };
+
+                await userRef.update(updates);
+                profileModal.style.display = 'none';
+                showCustomModal("نجاح!", "تم حفظ تغييرات الملف الشخصي بنجاح.", false);
+            } catch (error) {
+                handleFirebaseError(error);
+            }
+        });
+
+        // --- Change User Photo by Owner ---
+        function showChangeUserPhotoModal(uid, displayName, currentPhotoURL) {
+            currentActionTarget.targetPhotoUid = uid;
+            targetUserPhotoNameSpan.textContent = displayName;
+            targetUserPhotoPreview.src = currentPhotoURL;
+            newUserPhotoUrlInput.value = ''; 
+            changeUserPhotoModal.style.display = 'flex';
+        }
+
+        closeChangeUserPhotoModal.addEventListener('click', () => {
+            changeUserPhotoModal.style.display = 'none';
+            newUserPhotoUrlInput.value = ''; 
+            currentActionTarget.targetPhotoUid = null;
+        });
+
+        cancelUserPhotoButton.addEventListener('click', () => {
+            changeUserPhotoModal.style.display = 'none';
+            newUserPhotoUrlInput.value = ''; 
+            currentActionTarget.targetPhotoUid = null;
+        });
+
+        uploadUserPhotoButton.addEventListener('click', async () => {
+            if (!currentActionTarget.targetPhotoUid) return;
+
+            const newPhotoUrl = newUserPhotoUrlInput.value.trim(); 
+
+            if (!newPhotoUrl) {
+                showCustomModal("خطأ!", "الرجاء إدخال رابط الصورة.");
+                return;
+            }
+
+            if (!newPhotoUrl.startsWith('http://') && !newPhotoUrl.startsWith('https://')) {
+                showCustomModal("خطأ!", "الرجاء إدخال رابط URL صالح يبدأ بـ http:// أو https://");
+                return;
+            }
+
+            try {
+                uploadUserPhotoButton.disabled = true;
+                uploadUserPhotoButton.textContent = 'جاري التغيير...';
+
+                await database.ref('users/' + currentActionTarget.targetPhotoUid).update({
+                    photoURL: newPhotoUrl 
+                });
+
+                showCustomModal("نجاح!", "تم تغيير صورة المستخدم بنجاح.", false);
+                changeUserPhotoModal.style.display = 'none';
+                currentActionTarget.targetPhotoUid = null;
+                await loadUserList(); 
+            } catch (error) {
+                handleFirebaseError(error);
+            } finally {
+                uploadUserPhotoButton.disabled = false;
+                uploadUserPhotoButton.textContent = 'تغيير الصورة';
+            }
+        });
+
+        // --- Emoji Picker ---
+        const emojis = [
+            '🇮🇶', '😂', '👍', '❤️', '😅', '😍', '🤩', '😎', '😭', '🥺',
+            '🙏', '🔥', '💯', '👏', '💔', '🎉', '🌟','🌈', '💡', '🤔',
+            '💪', '👍', '👋', '🛑', '✅', '❌', '✨', '🎶', '✌️', '😉',
+            '😇', '🥳', '🤯', '🥶', '🥵', '😴', '🤑', '🤫', '😶‍🌫️', '🫠'
+        ];
+
+        function populateEmojiPicker() {
+            emojiPicker.innerHTML = '';
+            emojis.forEach(emoji => {
+                const span = document.createElement('span');
+                span.textContent = emoji;
+                span.addEventListener('click', () => {
+                    messageInput.value += emoji;
+                    messageInput.focus();
+                    emojiPicker.style.display = 'none';
+                });
+                emojiPicker.appendChild(span);
+            });
+        }
+
+        emojiButton.addEventListener('click', (event) => {
+            event.stopPropagation();
+            emojiPicker.style.display = emojiPicker.style.display === 'flex' ? 'none' : 'flex';
+        });
+
+        document.addEventListener('click', (event) => {
+            if (emojiPicker.style.display === 'flex' && !emojiPicker.contains(event.target) && event.target !== emojiButton) {
+                emojiPicker.style.display = 'none';
+            }
+        });
+
+        populateEmojiPicker();
+
+        // Close modals if clicked outside
+        window.addEventListener('click', (event) => {
+            if (event.target === userListModal) {
+                userListModal.style.display = 'none';
+            }
+            if (event.target === profileModal) {
+                profileModal.style.display = 'none';
+            }
+            if (event.target === userActionModal) {
+                userActionModal.style.display = 'none';
+            }
+            if (event.target === limitUserModal) {
+                limitUserModal.style.display = 'none';
+            }
+            if (event.target === changeUserPhotoModal) {
+                changeUserPhotoModal.style.display = 'none';
+                newUserPhotoUrlInput.value = ''; 
+                currentActionTarget.targetPhotoUid = null;
+            }
+            if (event.target === errorModal) { 
+                errorModal.style.display = 'none';
+            }
+        });
+
+    </script>
+</body>
+</html>
