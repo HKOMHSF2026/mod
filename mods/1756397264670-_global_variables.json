@@ -1,0 +1,6 @@
+{
+    "$map_key": "!mm.",
+    "$block_size": 5.0,
+    "$block_offset": [ 1, 0 ],
+    "$block_scale": 0.25
+}
