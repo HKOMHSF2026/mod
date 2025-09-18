@@ -1,0 +1,597 @@
+00:29:26.068 INFO  GCLog - PowerKitManager: initPowerKitCompat init ,powerKitTag=6200c2c6-4a4d-47ad-bf3f-6de460506ff1
+00:29:26.429 INFO  GCLog - START_UP_PROCESS: GameCenterBizApplication onAppInit preLoadMainPageData() will execute!
+00:29:26.457 ERROR GCLog - MainPageFileHelper: loadFrameDataFile is not exist
+00:29:26.497 INFO  GCLog - START_UP_PROCESS: MainPageCacheDataModel loadFrameData() mainFrameData from getFrameConfigCache() load time=64!
+00:29:26.500 ERROR GCLog - MainPageFileHelper: loadContentDataFile is not exist
+00:29:26.585 INFO  GCLog - GameAssistantImpl: udid is agree for SDK: 1
+00:29:26.587 INFO  GCLog - START_UP_PROCESS: AmsServiceImpl getUdidSignStateByGameAssistant state=1
+00:29:26.588 INFO  GCLog - START_UP_PROCESS: BootController appStartInit() invoked by GameCenterBizApplication onAppInit, boot hasReady: -1
+00:29:26.590 INFO  GCLog - START_UP_PROCESS: BootController startupBoot() invoked from: BootController appStartInit()
+00:29:26.592 INFO  GCLog - RegisterReceiverUseCase: Register user receiver execute
+00:29:26.596 INFO  GCLog - START_UP_PROCESS: checkSignLoginState from BootController startupBoot()
+00:29:26.600 INFO  GCLog - AccountServiceImpl: startupInit
+00:29:27.259 INFO  GCLog - AccountServiceImpl: startupInit end not login
+00:29:27.263 INFO  GCLog - SysConfigChecker: countryCode:IQ,lastCountryCode:
+00:29:27.264 INFO  GCLog - LanguageHelper: getLanguageCountryCode:ar
+00:29:27.265 INFO  GCLog - BootController: executeStartup: grs[IQ], uSit[IQ]
+00:29:27.322 INFO  GCLog - START_UP_PROCESS: BootController boot execute Startup finished isBootReady is: true
+00:29:27.341 INFO  GCLog - XDownloadInstallHelper: observerEvent UniteCountryCodeFinishEvent!
+00:29:27.342 INFO  GCLog - START_UP_PROCESS: GCDownloadInstallServiceStartHelper execute() invoked from is: XDownloadInstallHelper UniteCountryCodeFinishEvent, param isForceUpdate is: false, isContinueAllDownload is: false
+00:29:27.346 INFO  GCLog - ApkFileSha256Manager: init
+00:29:27.348 INFO  GCLog - GameCenterBizApplication: observerEvent init report SDK!
+00:29:27.342 INFO  GCLog - GameCenterBizApplication: observerEvent BootHotStartupEvent!
+00:29:27.358 ERROR GCLog - com.hihonor.gamecenter.base_report.HiAnalyticsManager: burying point not enable or no init eventId:881000000099
+00:29:27.359 INFO  GCLog - START_UP_PROCESS: GameCenterBizApplication onBizInit() boot success pushService.init(), getMainFrameFromNet(true) will execute.
+00:29:27.361 INFO  GCLog - START_UP_PROCESS: MainPageFrameRepository getMainFrameFromNet() invoked from: GameCenterBizApplication onBizInit(), execute isPreLoad is: true
+00:29:27.362 INFO  GCLog - PushServiceImpl: init
+00:29:27.366 INFO  GCLog - LanguageHelper: getLanguage language is: ar
+00:29:27.368 INFO  GCLog - LanguageHelper: getLanguageCountryCode:ar
+00:29:27.369 INFO  GCLog - isPersonalRecommend getIntelligentRecommend -> true
+00:29:27.373 ERROR GCLog - com.hihonor.gamecenter.base_report.HiAnalyticsManager: burying point not enable or no init eventId:8810000059
+00:29:27.386 ERROR GCLog - HonorDeviceUtils: getAppInfoFromPkgName fail -> com.hihonor.quickgame
+00:29:27.400 INFO  GCLog - ConfigHelper: WhiteList config init
+00:29:27.406 INFO  GCLog - GameCenterBizApplication: onBizInit updateToken
+00:29:27.454 INFO  GCLog - PushServiceImpl: updateToken isLoginOut=false start
+00:29:27.612 INFO  GCLog - LanguageHelper: getLanguage language is: ar
+00:29:27.614 INFO  GCLog - LanguageHelper: getLanguageCountryCode:ar
+00:29:27.615 INFO  GCLog - isPersonalRecommend getIntelligentRecommend -> true
+00:29:27.616 ERROR GCLog - HonorDeviceUtils: getAppInfoFromPkgName fail -> com.hihonor.quickgame
+00:29:27.629 INFO  GCLog - PushDownloadHelper: resumeDownloadByNetJobs!
+00:29:27.657 INFO  GCLog - LanguageHelper: getLanguage language is: ar
+00:29:27.658 INFO  GCLog - LanguageHelper: getLanguageCountryCode:ar
+00:29:27.660 INFO  GCLog - isPersonalRecommend getIntelligentRecommend -> true
+00:29:27.686 ERROR GCLog - HonorDeviceUtils: getAppInfoFromPkgName fail -> com.hihonor.quickgame
+00:29:27.709 INFO  GCLog - http_request: SafeGuardInterceptor intercept() request from  *********************ry/check start
+00:29:27.712 INFO  GCLog - http_request: SafeGuardInterceptor intercept() request from  ***********nfig/get start
+00:29:27.712 INFO  GCLog - http_request: *********************ry/check traceName = 48c65d72-8088-4f95-88cf-a0a29919f470
+00:29:27.747 INFO  GCLog - http_request: ***********nfig/get traceName = 8c04480f-17f2-40e3-828a-0c077b653865
+00:29:27.755 INFO  GCLog - LanguageHelper: getLanguage language is: ar
+00:29:27.757 INFO  GCLog - LanguageHelper: getLanguageCountryCode:ar
+00:29:27.758 INFO  GCLog - isPersonalRecommend getIntelligentRecommend -> true
+00:29:27.760 ERROR GCLog - HonorDeviceUtils: getAppInfoFromPkgName fail -> com.hihonor.quickgame
+00:29:27.775 INFO  GCLog - ConfigHelper: whiteList config observer send isRemote=false
+00:29:27.777 INFO  GCLog - LanguageHelper: getLanguage language is: ar
+00:29:27.778 INFO  GCLog - LanguageHelper: getLanguageCountryCode:ar
+00:29:27.779 INFO  GCLog - isPersonalRecommend getIntelligentRecommend -> true
+00:29:27.781 ERROR GCLog - HonorDeviceUtils: getAppInfoFromPkgName fail -> com.hihonor.quickgame
+00:29:27.800 INFO  GCLog - http_request: SafeGuardInterceptor intercept() request from  *****************nu/query start
+00:29:27.803 INFO  GCLog - http_request: *****************nu/query traceName = f4c0e106-8c19-4b6b-a93d-19a315d5c0df
+00:29:27.836 INFO  GCLog - http_request: SafeGuardInterceptor intercept() request from  ********************************st/check start
+00:29:27.842 INFO  GCLog - http_request: ********************************st/check traceName = 77ae7caa-0813-4e6d-b942-ebb2a9fdbbd6
+00:29:27.871 INFO  GCLog - http_request: SafeGuardInterceptor intercept() request from  ********************************st/query start
+00:29:27.878 INFO  GCLog - http_request: ********************************st/query traceName = 604d466c-55a1-4318-b943-2eb39a4cf582
+00:29:27.964 INFO  GCLog - ApkFileSha256Manager: init() apk fileSha256 success. 
+00:29:28.466 ERROR GCLog - GameCenterBizApplication: get advertisement info failed, message:getAdvertisingIdInfo(context) must not be null
+00:29:29.680 INFO  GCLog - LanguageHelper: getLanguage language is: ar
+00:29:29.681 INFO  GCLog - LanguageHelper: getLanguageCountryCode:ar
+00:29:29.682 INFO  GCLog - isPersonalRecommend getIntelligentRecommend -> true
+00:29:29.684 ERROR GCLog - HonorDeviceUtils: getAppInfoFromPkgName fail -> com.hihonor.quickgame
+00:29:29.700 INFO  GCLog - http_request: SafeGuardInterceptor intercept() request from  ***********nfig/get start
+00:29:29.704 INFO  GCLog - http_request: ***********nfig/get traceName = 4575abe1-4656-4e64-bd4b-07c97b1a2b18
+00:29:29.760 INFO  GCLog - START_UP_PROCESS: queryAllAppUpdate() start.
+00:29:29.779 ERROR GCLog - http_request: SafeGuardInterceptor intercept() request from   *********************ry/check end, fail errorMsg = UnknownHostException
+00:29:29.782 ERROR GCLog - BaseReqImpl: queryCountryAvailability error: SafeGuardInterceptor exception when requesting Unable to resolve host "gamecenter-gw-dra.hispace.hihonorcloud.com": No address associated with hostname
+00:29:29.791 ERROR GCLog - http_request: SafeGuardInterceptor intercept() request from   ***********nfig/get end, fail errorMsg = UnknownHostException
+00:29:29.794 ERROR GCLog - http_request: netErrorHandle:com.hihonor.gamecenter.base_net.intercept.IOExceptionWrapper: SafeGuardInterceptor exception when requesting Unable to resolve host "gamecenter-gw-dra.hispace.hihonorcloud.com": No address associated with hostname
+00:29:29.795 INFO  GCLog - SplashAdFloatBallHelper: getGreyModeConfig() isGreyMode is: null
+00:29:29.803 ERROR GCLog - com.hihonor.gamecenter.bu_base.reserve.ReserveHelper: query reserve online info token is null
+00:29:29.805 INFO  GCLog - MinorsModeSetting: localSPKidsMode=false, currentKidsMode=false
+00:29:29.825 INFO  GCLog - MinorsModeSetting: refreshKidsMode=false
+00:29:29.847 ERROR GCLog - http_request: SafeGuardInterceptor intercept() request from   *****************nu/query end, fail errorMsg = UnknownHostException
+00:29:29.848 INFO  GCLog - AmsLocHelper: checkAccountServ resp.errorCode is: 
+00:29:29.870 INFO  GCLog - AmsLocHelper: start get service: net error
+00:29:29.857 ERROR GCLog - http_request: netErrorHandle:com.hihonor.gamecenter.base_net.intercept.IOExceptionWrapper: SafeGuardInterceptor exception when requesting Unable to resolve host "gamecenter-gw-dra.hispace.hihonorcloud.com": No address associated with hostname
+00:29:29.895 INFO  GCLog - GameCenterBizApplication: observerEvent BootMinorsAccountGuardianVerificationEvent: false
+00:29:29.919 ERROR GCLog - http_request: SafeGuardInterceptor intercept() request from   ********************************st/check end, fail errorMsg = UnknownHostException
+00:29:29.923 ERROR GCLog - http_request: SafeGuardInterceptor intercept() request from   ********************************st/query end, fail errorMsg = UnknownHostException
+00:29:29.929 INFO  GCLog - GameCenterBizApplication: observerEvent BootChildModeWithNotLoginEvent: false
+00:29:29.937 INFO  GCLog - AmsServiceImpl: checkAmsServiceForBootStartupResult: notifyAmsCheckResult,result=Error(errMsg=check service error)
+00:29:29.938 INFO  GCLog - AmsServiceImpl: notifyState: notifyAmsCheckResult，lastAmsCheckResult=BootStartupResult.Unknown is false
+00:29:29.942 ERROR GCLog - START_UP_PROCESS: StartupUseCase handleResult: startup error is: check service error
+00:29:29.952 INFO  GCLog - START_UP_PROCESS: MainPageFrameRepository getMainFrameFromNet() success.
+00:29:29.954 INFO  GCLog - GameCenterBizApplication: observerEvent AgreementUpdateEvent: false null
+00:29:29.973 INFO  GCLog - LanguageHelper: getLanguage language is: ar
+00:29:29.977 INFO  GCLog - LanguageHelper: getLanguageCountryCode:ar
+00:29:29.979 INFO  GCLog - HnPushProvider: PushServiceImpl getPushStatus : enable true
+00:29:30.023 INFO  GCLog - GetAppInfoHelp: getInstalledPackages end
+00:29:30.031 INFO  GCLog - LanguageHelper: getLanguage language is: ar
+00:29:30.016 INFO  GCLog - START_UP_PROCESS: MainPageFrameRepository getMainFrameFromNet() load data to mem file sp success.
+00:29:30.034 INFO  GCLog - LanguageHelper: getLanguageCountryCode:ar
+00:29:30.040 INFO  GCLog - isPersonalRecommend getIntelligentRecommend -> true
+00:29:30.000 INFO  GCLog - PushServiceImpl: updateToken:enable:true
+00:29:30.043 ERROR GCLog - HonorDeviceUtils: getAppInfoFromPkgName fail -> com.hihonor.quickgame
+00:29:30.052 INFO  GCLog - PushServiceImpl: updateToken isLoginOut=false bindService
+00:29:30.063 INFO  GCLog - http_request: SafeGuardInterceptor intercept() request from  ********************k/update start
+00:29:30.067 INFO  GCLog - http_request: ********************k/update traceName = fcb0dae5-a075-4e4a-97b8-9db425191e17
+00:29:30.110 INFO  GCLog - LanguageHelper: getLanguage language is: ar
+00:29:30.112 INFO  GCLog - LanguageHelper: getLanguageCountryCode:ar
+00:29:30.113 INFO  GCLog - isPersonalRecommend getIntelligentRecommend -> true
+00:29:30.115 ERROR GCLog - HonorDeviceUtils: getAppInfoFromPkgName fail -> com.hihonor.quickgame
+00:29:30.142 INFO  GCLog - http_request: SafeGuardInterceptor intercept() request from  *********************n/upload start
+00:29:30.145 INFO  GCLog - http_request: *********************n/upload traceName = 356508e6-2786-480d-b710-686cbed767c4
+00:29:31.758 ERROR GCLog - http_request: SafeGuardInterceptor intercept() request from   ***********nfig/get end, fail errorMsg = UnknownHostException
+00:29:31.760 ERROR GCLog - http_request: netErrorHandle:com.hihonor.gamecenter.base_net.intercept.IOExceptionWrapper: SafeGuardInterceptor exception when requesting Unable to resolve host "gamecenter-gw-dra.hispace.hihonorcloud.com": No address associated with hostname
+00:29:31.763 INFO  GCLog - LanguageHelper: getLanguage language is: ar
+00:29:31.765 INFO  GCLog - LanguageHelper: getLanguageCountryCode:ar
+00:29:31.766 INFO  GCLog - isPersonalRecommend getIntelligentRecommend -> true
+00:29:31.769 ERROR GCLog - HonorDeviceUtils: getAppInfoFromPkgName fail -> com.hihonor.quickgame
+00:29:31.781 INFO  GCLog - http_request: SafeGuardInterceptor intercept() request from  ****************h/v1/get start
+00:29:31.783 INFO  GCLog - http_request: ****************h/v1/get traceName = 7a110d4d-e74a-4691-a04d-a4ef02a269d2
+00:29:32.132 ERROR GCLog - AppListParamIntercept: when parse requestBodyStr error Unable to resolve host "gamecenter-gw-dra.hispace.hihonorcloud.com": No address associated with hostname
+00:29:32.193 ERROR GCLog - http_request: SafeGuardInterceptor intercept() request from   *********************n/upload end, fail errorMsg = UnknownHostException
+00:29:32.196 ERROR GCLog - http_request: netErrorHandle:com.hihonor.gamecenter.base_net.intercept.IOExceptionWrapper: SafeGuardInterceptor exception when requesting Unable to resolve host "gamecenter-gw-dra.hispace.hihonorcloud.com": No address associated with hostname
+00:29:32.198 ERROR GCLog - PushServiceImpl: updateToken bind fail[10999]
+00:29:33.842 ERROR GCLog - http_request: SafeGuardInterceptor intercept() request from   ****************h/v1/get end, fail errorMsg = UnknownHostException
+00:29:33.846 ERROR GCLog - http_request: netErrorHandle:com.hihonor.gamecenter.base_net.intercept.IOExceptionWrapper: SafeGuardInterceptor exception when requesting Unable to resolve host "gamecenter-gw-dra.hispace.hihonorcloud.com": No address associated with hostname
+00:29:33.850 INFO  GCLog - AppStartHelper: syncSwitchStateToService: agreeAmsUpdateSwitch = false
+00:29:33.854 INFO  GCLog - LanguageHelper: getLanguage language is: ar
+00:29:33.856 INFO  GCLog - LanguageHelper: getLanguageCountryCode:ar
+00:29:33.859 INFO  GCLog - isPersonalRecommend getIntelligentRecommend -> true
+00:29:33.862 ERROR GCLog - HonorDeviceUtils: getAppInfoFromPkgName fail -> com.hihonor.quickgame
+00:29:33.886 INFO  GCLog - http_request: SafeGuardInterceptor intercept() request from  ***********nfig/get start
+00:29:33.889 INFO  GCLog - http_request: ***********nfig/get traceName = b1564c55-aed8-4abd-9302-40f069fddf51
+00:29:34.182 ERROR GCLog - http_request: SafeGuardInterceptor intercept() request from   ********************k/update end, fail errorMsg = UnknownHostException
+00:29:34.186 ERROR GCLog - http_request: netErrorHandle:com.hihonor.gamecenter.base_net.intercept.IOExceptionWrapper: SafeGuardInterceptor exception when requesting Unable to resolve host "gamecenter-gw-dra.hispace.hihonorcloud.com": No address associated with hostname
+00:29:35.951 ERROR GCLog - http_request: SafeGuardInterceptor intercept() request from   ***********nfig/get end, fail errorMsg = UnknownHostException
+00:29:35.956 ERROR GCLog - http_request: netErrorHandle:com.hihonor.gamecenter.base_net.intercept.IOExceptionWrapper: SafeGuardInterceptor exception when requesting Unable to resolve host "gamecenter-gw-dra.hispace.hihonorcloud.com": No address associated with hostname
+14:06:45.623 INFO  GCLog - PowerKitManager: initPowerKitCompat init ,powerKitTag=eafe24a9-0559-4e3f-a541-d530d3b6e5f7
+14:06:45.638 INFO  GCLog - AccountServiceImpl: startupInit end not login
+14:06:45.640 INFO  GCLog - SysConfigChecker: countryCode:IQ,lastCountryCode:
+14:06:45.641 INFO  GCLog - BootController: executeStartup: grs[IQ], uSit[IQ]
+14:06:45.662 INFO  GCLog - START_UP_PROCESS: BootController boot execute Startup finished isBootReady is: true
+14:06:45.687 INFO  GCLog - LanguageHelper: getLanguageCountryCode:ar
+14:06:45.743 INFO  GCLog - GameCenterBizApplication: observerEvent init report SDK!
+14:06:45.745 INFO  GCLog - ConfigHelper: WhiteList config init
+14:06:45.747 INFO  GCLog - XDownloadInstallHelper: observerEvent UniteCountryCodeFinishEvent!
+14:06:45.749 INFO  GCLog - GameCenterBizApplication: observerEvent BootHotStartupEvent!
+14:06:45.749 INFO  GCLog - START_UP_PROCESS: GCDownloadInstallServiceStartHelper execute() invoked from is: XDownloadInstallHelper UniteCountryCodeFinishEvent, param isForceUpdate is: false, isContinueAllDownload is: false
+14:06:45.754 INFO  GCLog - ApkFileSha256Manager: init
+14:06:45.765 ERROR GCLog - com.hihonor.gamecenter.base_report.HiAnalyticsManager: burying point not enable or no init eventId:8810000059
+14:06:45.767 INFO  GCLog - START_UP_PROCESS: GameCenterBizApplication onBizInit() boot success pushService.init(), getMainFrameFromNet(true) will execute.
+14:06:45.769 INFO  GCLog - START_UP_PROCESS: MainPageFrameRepository getMainFrameFromNet() invoked from: GameCenterBizApplication onBizInit(), execute isPreLoad is: true
+14:06:45.773 INFO  GCLog - LanguageHelper: getLanguage language is: ar
+14:06:45.774 INFO  GCLog - LanguageHelper: getLanguageCountryCode:ar
+14:06:45.776 INFO  GCLog - isPersonalRecommend getIntelligentRecommend -> true
+14:06:45.781 ERROR GCLog - com.hihonor.gamecenter.base_report.HiAnalyticsManager: burying point not enable or no init eventId:881000000099
+14:06:45.781 INFO  GCLog - PushServiceImpl: init
+14:06:45.784 ERROR GCLog - HonorDeviceUtils: getAppInfoFromPkgName fail -> com.hihonor.quickgame
+14:06:45.806 INFO  GCLog - GameCenterBizApplication: onBizInit updateToken
+14:06:45.807 INFO  GCLog - PushServiceImpl: updateToken isLoginOut=false start
+14:06:45.926 INFO  GCLog - LanguageHelper: getLanguage language is: ar
+14:06:45.927 INFO  GCLog - PushDownloadHelper: resumeDownloadByNetJobs!
+14:06:45.928 INFO  GCLog - LanguageHelper: getLanguage language is: ar
+14:06:45.928 INFO  GCLog - LanguageHelper: getLanguageCountryCode:ar
+14:06:45.930 INFO  GCLog - isPersonalRecommend getIntelligentRecommend -> true
+14:06:45.937 ERROR GCLog - HonorDeviceUtils: getAppInfoFromPkgName fail -> com.hihonor.quickgame
+14:06:45.945 INFO  GCLog - LanguageHelper: getLanguageCountryCode:ar
+14:06:45.946 INFO  GCLog - isPersonalRecommend getIntelligentRecommend -> true
+14:06:45.955 ERROR GCLog - HonorDeviceUtils: getAppInfoFromPkgName fail -> com.hihonor.quickgame
+14:06:46.015 INFO  GCLog - LanguageHelper: getLanguage language is: ar
+14:06:46.017 INFO  GCLog - LanguageHelper: getLanguageCountryCode:ar
+14:06:46.021 INFO  GCLog - isPersonalRecommend getIntelligentRecommend -> true
+14:06:46.025 ERROR GCLog - HonorDeviceUtils: getAppInfoFromPkgName fail -> com.hihonor.quickgame
+14:06:46.047 INFO  GCLog - ConfigHelper: whiteList config observer send isRemote=false
+14:06:46.052 INFO  GCLog - LanguageHelper: getLanguage language is: ar
+14:06:46.059 INFO  GCLog - LanguageHelper: getLanguageCountryCode:ar
+14:06:46.058 INFO  GCLog - http_request: SafeGuardInterceptor intercept() request from  ***********nfig/get start
+14:06:46.053 INFO  GCLog - http_request: SafeGuardInterceptor intercept() request from  *****************nu/query start
+14:06:46.064 INFO  GCLog - http_request: ***********nfig/get traceName = 8b7e4c06-08ee-49f6-a56d-03f8b6dc8265
+14:06:46.064 INFO  GCLog - http_request: *****************nu/query traceName = 2683c741-3a7f-4edc-9b4d-d2096560caa5
+14:06:46.068 INFO  GCLog - isPersonalRecommend getIntelligentRecommend -> true
+14:06:46.086 ERROR GCLog - HonorDeviceUtils: getAppInfoFromPkgName fail -> com.hihonor.quickgame
+14:06:46.097 INFO  GCLog - http_request: SafeGuardInterceptor intercept() request from  *********************ry/check start
+14:06:46.103 INFO  GCLog - ApkFileSha256Manager: init() apk fileSha256 success. 
+14:06:46.103 INFO  GCLog - http_request: SafeGuardInterceptor intercept() request from  ********************************st/check start
+14:06:46.112 INFO  GCLog - http_request: ********************************st/check traceName = 863579a0-fa57-4c0a-9139-8e7fd851f4bd
+14:06:46.124 INFO  GCLog - http_request: *********************ry/check traceName = 48bae5a7-b699-4941-bdbc-07c548bd6377
+14:06:46.139 INFO  GCLog - http_request: SafeGuardInterceptor intercept() request from  ********************************st/query start
+14:06:46.154 INFO  GCLog - http_request: ********************************st/query traceName = 49873dec-6b4a-42e3-8484-c9008b1257f5
+14:06:46.679 INFO  GCLog - START_UP_PROCESS: GameCenterBizApplication onAppInit preLoadMainPageData() will execute!
+14:06:46.684 ERROR GCLog - MainPageFileHelper: loadFrameDataFile is not exist
+14:06:46.721 INFO  GCLog - START_UP_PROCESS: MainPageCacheDataModel loadFrameData() mainFrameData from getFrameConfigCache() load time=39!
+14:06:46.733 ERROR GCLog - MainPageFileHelper: loadContentDataFile is not exist
+14:06:47.035 INFO  GCLog - LanguageHelper: getLanguage language is: ar
+14:06:47.037 INFO  GCLog - LanguageHelper: getLanguageCountryCode:ar
+14:06:47.038 INFO  GCLog - isPersonalRecommend getIntelligentRecommend -> true
+14:06:47.041 ERROR GCLog - HonorDeviceUtils: getAppInfoFromPkgName fail -> com.hihonor.quickgame
+14:06:47.062 INFO  GCLog - http_request: SafeGuardInterceptor intercept() request from  ***********nfig/get start
+14:06:47.065 INFO  GCLog - http_request: ***********nfig/get traceName = 06dcebf6-9299-4752-bb7c-a830965accf2
+14:06:47.928 INFO  GCLog - START_UP_PROCESS: queryAllAppUpdate() start.
+14:06:48.126 ERROR GCLog - com.hihonor.gamecenter.bu_base.reserve.ReserveHelper: query reserve online info token is null
+14:06:48.155 INFO  GCLog - GetAppInfoHelp: getInstalledPackages end
+14:06:48.164 INFO  GCLog - LanguageHelper: getLanguage language is: ar
+14:06:48.166 INFO  GCLog - LanguageHelper: getLanguageCountryCode:ar
+14:06:48.168 INFO  GCLog - isPersonalRecommend getIntelligentRecommend -> true
+14:06:48.173 ERROR GCLog - HonorDeviceUtils: getAppInfoFromPkgName fail -> com.hihonor.quickgame
+14:06:48.186 ERROR GCLog - http_request: SafeGuardInterceptor intercept() request from   *********************ry/check end, fail errorMsg = UnknownHostException
+14:06:48.187 ERROR GCLog - http_request: SafeGuardInterceptor intercept() request from   ***********nfig/get end, fail errorMsg = UnknownHostException
+14:06:48.190 ERROR GCLog - BaseReqImpl: queryCountryAvailability error: SafeGuardInterceptor exception when requesting Unable to resolve host "gamecenter-gw-dra.hispace.hihonorcloud.com": No address associated with hostname
+14:06:48.193 ERROR GCLog - http_request: netErrorHandle:com.hihonor.gamecenter.base_net.intercept.IOExceptionWrapper: SafeGuardInterceptor exception when requesting Unable to resolve host "gamecenter-gw-dra.hispace.hihonorcloud.com": No address associated with hostname
+14:06:48.193 ERROR GCLog - http_request: SafeGuardInterceptor intercept() request from   *****************nu/query end, fail errorMsg = UnknownHostException
+14:06:48.193 INFO  GCLog - AmsLocHelper: checkAccountServ resp.errorCode is: 
+14:06:48.195 ERROR GCLog - http_request: SafeGuardInterceptor intercept() request from   ********************************st/check end, fail errorMsg = UnknownHostException
+14:06:48.196 ERROR GCLog - http_request: netErrorHandle:com.hihonor.gamecenter.base_net.intercept.IOExceptionWrapper: SafeGuardInterceptor exception when requesting Unable to resolve host "gamecenter-gw-dra.hispace.hihonorcloud.com": No address associated with hostname
+14:06:48.197 INFO  GCLog - AmsLocHelper: start get service: net error
+14:06:48.199 INFO  GCLog - SplashAdFloatBallHelper: getGreyModeConfig() isGreyMode is: null
+14:06:48.212 ERROR GCLog - http_request: SafeGuardInterceptor intercept() request from   ********************************st/query end, fail errorMsg = UnknownHostException
+14:06:48.241 INFO  GCLog - MinorsModeSetting: localSPKidsMode=false, currentKidsMode=false
+14:06:48.242 INFO  GCLog - MinorsModeSetting: refreshKidsMode=false
+14:06:48.251 INFO  GCLog - http_request: SafeGuardInterceptor intercept() request from  ********************k/update start
+14:06:48.265 INFO  GCLog - AmsServiceImpl: checkAmsServiceForBootStartupResult: notifyAmsCheckResult,result=Error(errMsg=check service error)
+14:06:48.267 INFO  GCLog - AmsServiceImpl: notifyState: notifyAmsCheckResult，lastAmsCheckResult=BootStartupResult.Unknown is false
+14:06:48.268 INFO  GCLog - GameCenterBizApplication: observerEvent BootMinorsAccountGuardianVerificationEvent: false
+14:06:48.269 ERROR GCLog - START_UP_PROCESS: StartupUseCase handleResult: startup error is: check service error
+14:06:48.270 INFO  GCLog - GameCenterBizApplication: observerEvent BootChildModeWithNotLoginEvent: false
+14:06:48.272 INFO  GCLog - HnPushProvider: PushServiceImpl getPushStatus : enable true
+14:06:48.273 INFO  GCLog - http_request: ********************k/update traceName = 3be69f84-761a-47c1-8b93-a621e5b02b11
+14:06:48.274 INFO  GCLog - PushServiceImpl: updateToken:enable:true
+14:06:48.274 INFO  GCLog - GameCenterBizApplication: observerEvent AgreementUpdateEvent: false null
+14:06:48.276 INFO  GCLog - PushServiceImpl: updateToken isLoginOut=false bindService
+14:06:48.288 INFO  GCLog - START_UP_PROCESS: MainPageFrameRepository getMainFrameFromNet() success.
+14:06:48.308 INFO  GCLog - LanguageHelper: getLanguage language is: ar
+14:06:48.315 INFO  GCLog - LanguageHelper: getLanguageCountryCode:ar
+14:06:48.366 INFO  GCLog - START_UP_PROCESS: MainPageFrameRepository getMainFrameFromNet() load data to mem file sp success.
+14:06:48.384 INFO  GCLog - LanguageHelper: getLanguage language is: ar
+14:06:48.388 INFO  GCLog - LanguageHelper: getLanguageCountryCode:ar
+14:06:48.395 INFO  GCLog - isPersonalRecommend getIntelligentRecommend -> true
+14:06:48.398 ERROR GCLog - HonorDeviceUtils: getAppInfoFromPkgName fail -> com.hihonor.quickgame
+14:06:48.426 INFO  GCLog - http_request: SafeGuardInterceptor intercept() request from  *********************n/upload start
+14:06:48.440 INFO  GCLog - http_request: *********************n/upload traceName = 3fd83698-ab88-4e7a-99e2-498f96ca1f3e
+14:06:49.116 ERROR GCLog - http_request: SafeGuardInterceptor intercept() request from   ***********nfig/get end, fail errorMsg = UnknownHostException
+14:06:49.120 ERROR GCLog - http_request: netErrorHandle:com.hihonor.gamecenter.base_net.intercept.IOExceptionWrapper: SafeGuardInterceptor exception when requesting Unable to resolve host "gamecenter-gw-dra.hispace.hihonorcloud.com": No address associated with hostname
+14:06:49.124 INFO  GCLog - LanguageHelper: getLanguage language is: ar
+14:06:49.125 INFO  GCLog - LanguageHelper: getLanguageCountryCode:ar
+14:06:49.127 INFO  GCLog - isPersonalRecommend getIntelligentRecommend -> true
+14:06:49.130 ERROR GCLog - HonorDeviceUtils: getAppInfoFromPkgName fail -> com.hihonor.quickgame
+14:06:49.148 INFO  GCLog - http_request: SafeGuardInterceptor intercept() request from  ****************h/v1/get start
+14:06:49.152 INFO  GCLog - http_request: ****************h/v1/get traceName = 193c8993-3e17-4f88-88f8-02e306c770a8
+14:06:50.388 ERROR GCLog - AppListParamIntercept: when parse requestBodyStr error Unable to resolve host "gamecenter-gw-dra.hispace.hihonorcloud.com": No address associated with hostname
+14:06:50.509 ERROR GCLog - http_request: SafeGuardInterceptor intercept() request from   *********************n/upload end, fail errorMsg = UnknownHostException
+14:06:50.512 ERROR GCLog - http_request: netErrorHandle:com.hihonor.gamecenter.base_net.intercept.IOExceptionWrapper: SafeGuardInterceptor exception when requesting Unable to resolve host "gamecenter-gw-dra.hispace.hihonorcloud.com": No address associated with hostname
+14:06:50.513 ERROR GCLog - PushServiceImpl: updateToken bind fail[10999]
+14:06:51.200 ERROR GCLog - http_request: SafeGuardInterceptor intercept() request from   ****************h/v1/get end, fail errorMsg = UnknownHostException
+14:06:51.202 ERROR GCLog - http_request: netErrorHandle:com.hihonor.gamecenter.base_net.intercept.IOExceptionWrapper: SafeGuardInterceptor exception when requesting Unable to resolve host "gamecenter-gw-dra.hispace.hihonorcloud.com": No address associated with hostname
+14:06:51.204 INFO  GCLog - AppStartHelper: syncSwitchStateToService: agreeAmsUpdateSwitch = false
+14:06:51.206 INFO  GCLog - LanguageHelper: getLanguage language is: ar
+14:06:51.207 INFO  GCLog - LanguageHelper: getLanguageCountryCode:ar
+14:06:51.211 INFO  GCLog - isPersonalRecommend getIntelligentRecommend -> true
+14:06:51.226 ERROR GCLog - HonorDeviceUtils: getAppInfoFromPkgName fail -> com.hihonor.quickgame
+14:06:51.247 INFO  GCLog - http_request: SafeGuardInterceptor intercept() request from  ***********nfig/get start
+14:06:51.254 INFO  GCLog - http_request: ***********nfig/get traceName = d5f8a442-0c85-4ab7-bdac-aad654b4bdd7
+14:06:52.452 ERROR GCLog - http_request: SafeGuardInterceptor intercept() request from   ********************k/update end, fail errorMsg = UnknownHostException
+14:06:52.455 ERROR GCLog - http_request: netErrorHandle:com.hihonor.gamecenter.base_net.intercept.IOExceptionWrapper: SafeGuardInterceptor exception when requesting Unable to resolve host "gamecenter-gw-dra.hispace.hihonorcloud.com": No address associated with hostname
+14:06:53.284 ERROR GCLog - http_request: SafeGuardInterceptor intercept() request from   ***********nfig/get end, fail errorMsg = UnknownHostException
+14:06:53.294 ERROR GCLog - http_request: netErrorHandle:com.hihonor.gamecenter.base_net.intercept.IOExceptionWrapper: SafeGuardInterceptor exception when requesting Unable to resolve host "gamecenter-gw-dra.hispace.hihonorcloud.com": No address associated with hostname
+14:15:12.721 INFO  GCLog - ScreenReceiver: action: android.intent.action.SCREEN_ON
+14:15:38.394 INFO  GCLog - ScreenReceiver: action: android.intent.action.SCREEN_OFF
+14:15:38.401 INFO  GCLog - START_UP_PROCESS: queryAllAppUpdate() start.
+14:15:38.587 INFO  GCLog - GetAppInfoHelp: getInstalledPackages end
+14:15:38.592 INFO  GCLog - LanguageHelper: getLanguage language is: ar
+14:15:38.594 INFO  GCLog - LanguageHelper: getLanguageCountryCode:ar
+14:15:38.595 INFO  GCLog - isPersonalRecommend getIntelligentRecommend -> true
+14:15:38.598 ERROR GCLog - HonorDeviceUtils: getAppInfoFromPkgName fail -> com.hihonor.quickgame
+14:15:38.619 INFO  GCLog - http_request: SafeGuardInterceptor intercept() request from  ********************k/update start
+14:15:38.630 INFO  GCLog - http_request: ********************k/update traceName = 4bd0ef26-029a-4f08-b4ef-dc08405dba5e
+14:15:40.699 ERROR GCLog - AppListParamIntercept: when parse requestBodyStr error Unable to resolve host "gamecenter-gw-dra.hispace.hihonorcloud.com": No address associated with hostname
+14:15:42.741 ERROR GCLog - http_request: SafeGuardInterceptor intercept() request from   ********************k/update end, fail errorMsg = UnknownHostException
+14:15:42.746 ERROR GCLog - http_request: netErrorHandle:com.hihonor.gamecenter.base_net.intercept.IOExceptionWrapper: SafeGuardInterceptor exception when requesting Unable to resolve host "gamecenter-gw-dra.hispace.hihonorcloud.com": No address associated with hostname
+14:16:46.840 INFO  GCLog - ScreenReceiver: action: android.intent.action.SCREEN_ON
+14:16:50.232 INFO  GCLog - PowerConnectedReceiver: onReceive p1 is: android.intent.action.ACTION_POWER_CONNECTED
+14:16:52.601 INFO  GCLog - ScreenReceiver: action: android.intent.action.SCREEN_OFF
+14:16:52.608 INFO  GCLog - START_UP_PROCESS: queryAllAppUpdate() start.
+14:16:52.767 INFO  GCLog - GetAppInfoHelp: getInstalledPackages end
+14:16:52.771 INFO  GCLog - LanguageHelper: getLanguage language is: ar
+14:16:52.774 INFO  GCLog - LanguageHelper: getLanguageCountryCode:ar
+14:16:52.778 INFO  GCLog - isPersonalRecommend getIntelligentRecommend -> true
+14:16:52.782 ERROR GCLog - HonorDeviceUtils: getAppInfoFromPkgName fail -> com.hihonor.quickgame
+14:16:52.807 INFO  GCLog - http_request: SafeGuardInterceptor intercept() request from  ********************k/update start
+14:16:52.817 INFO  GCLog - http_request: ********************k/update traceName = e63cacc8-b82e-4460-b1ef-4ce7ba4729df
+14:16:54.887 ERROR GCLog - AppListParamIntercept: when parse requestBodyStr error Unable to resolve host "gamecenter-gw-dra.hispace.hihonorcloud.com": No address associated with hostname
+14:16:56.941 ERROR GCLog - http_request: SafeGuardInterceptor intercept() request from   ********************k/update end, fail errorMsg = UnknownHostException
+14:16:56.946 ERROR GCLog - http_request: netErrorHandle:com.hihonor.gamecenter.base_net.intercept.IOExceptionWrapper: SafeGuardInterceptor exception when requesting Unable to resolve host "gamecenter-gw-dra.hispace.hihonorcloud.com": No address associated with hostname
+14:17:16.296 INFO  GCLog - ScreenReceiver: action: android.intent.action.SCREEN_ON
+14:17:48.240 INFO  GCLog - PowerConnectedReceiver: onReceive p1 is: android.intent.action.ACTION_POWER_CONNECTED
+14:17:48.508 INFO  GCLog - ScreenReceiver: action: android.intent.action.SCREEN_OFF
+14:17:48.509 INFO  GCLog - START_UP_PROCESS: queryAllAppUpdate() start.
+14:17:48.513 INFO  GCLog - ScreenReceiver: action: android.intent.action.SCREEN_ON
+14:17:48.583 INFO  GCLog - GetAppInfoHelp: getInstalledPackages end
+14:17:48.586 INFO  GCLog - LanguageHelper: getLanguage language is: ar
+14:17:48.587 INFO  GCLog - LanguageHelper: getLanguageCountryCode:ar
+14:17:48.588 INFO  GCLog - isPersonalRecommend getIntelligentRecommend -> true
+14:17:48.591 ERROR GCLog - HonorDeviceUtils: getAppInfoFromPkgName fail -> com.hihonor.quickgame
+14:17:48.603 INFO  GCLog - http_request: SafeGuardInterceptor intercept() request from  ********************k/update start
+14:17:48.607 INFO  GCLog - http_request: ********************k/update traceName = 51d9f166-f269-4ff8-bcb6-3a0186e20bc7
+14:17:50.666 ERROR GCLog - AppListParamIntercept: when parse requestBodyStr error Unable to resolve host "gamecenter-gw-dra.hispace.hihonorcloud.com": No address associated with hostname
+14:17:50.690 INFO  GCLog - ScreenReceiver: action: android.intent.action.SCREEN_OFF
+14:17:50.692 INFO  GCLog - START_UP_PROCESS: queryAllAppUpdate() start.
+14:17:50.773 INFO  GCLog - GetAppInfoHelp: getInstalledPackages end
+14:17:50.774 INFO  GCLog - LanguageHelper: getLanguage language is: ar
+14:17:50.775 INFO  GCLog - LanguageHelper: getLanguageCountryCode:ar
+14:17:50.776 INFO  GCLog - isPersonalRecommend getIntelligentRecommend -> true
+14:17:50.778 ERROR GCLog - HonorDeviceUtils: getAppInfoFromPkgName fail -> com.hihonor.quickgame
+14:17:50.787 INFO  GCLog - http_request: SafeGuardInterceptor intercept() request from  ********************k/update start
+14:17:50.791 INFO  GCLog - http_request: ********************k/update traceName = 40ba487e-202f-47d6-933b-6809a54ee281
+14:17:52.703 ERROR GCLog - http_request: SafeGuardInterceptor intercept() request from   ********************k/update end, fail errorMsg = UnknownHostException
+14:17:52.708 ERROR GCLog - http_request: netErrorHandle:com.hihonor.gamecenter.base_net.intercept.IOExceptionWrapper: SafeGuardInterceptor exception when requesting Unable to resolve host "gamecenter-gw-dra.hispace.hihonorcloud.com": No address associated with hostname
+14:17:52.844 ERROR GCLog - AppListParamIntercept: when parse requestBodyStr error Unable to resolve host "gamecenter-gw-dra.hispace.hihonorcloud.com": No address associated with hostname
+14:17:54.863 ERROR GCLog - http_request: SafeGuardInterceptor intercept() request from   ********************k/update end, fail errorMsg = UnknownHostException
+14:17:54.867 ERROR GCLog - http_request: netErrorHandle:com.hihonor.gamecenter.base_net.intercept.IOExceptionWrapper: SafeGuardInterceptor exception when requesting Unable to resolve host "gamecenter-gw-dra.hispace.hihonorcloud.com": No address associated with hostname
+14:22:28.487 INFO  GCLog - ScreenReceiver: action: android.intent.action.SCREEN_ON
+14:22:28.787 INFO  GCLog - ScreenReceiver: action: android.intent.action.SCREEN_OFF
+14:22:28.788 INFO  GCLog - START_UP_PROCESS: queryAllAppUpdate() start.
+14:22:28.834 INFO  GCLog - GetAppInfoHelp: getInstalledPackages end
+14:22:28.836 INFO  GCLog - LanguageHelper: getLanguage language is: ar
+14:22:28.837 INFO  GCLog - LanguageHelper: getLanguageCountryCode:ar
+14:22:28.838 INFO  GCLog - isPersonalRecommend getIntelligentRecommend -> true
+14:22:28.841 ERROR GCLog - HonorDeviceUtils: getAppInfoFromPkgName fail -> com.hihonor.quickgame
+14:22:28.850 INFO  GCLog - http_request: SafeGuardInterceptor intercept() request from  ********************k/update start
+14:22:28.855 INFO  GCLog - http_request: ********************k/update traceName = 96add690-fbbc-43e3-b002-b3f74dc38e96
+14:22:29.053 INFO  GCLog - ScreenReceiver: action: android.intent.action.SCREEN_ON
+14:22:30.928 ERROR GCLog - AppListParamIntercept: when parse requestBodyStr error Unable to resolve host "gamecenter-gw-dra.hispace.hihonorcloud.com": No address associated with hostname
+14:22:36.012 ERROR GCLog - http_request: SafeGuardInterceptor intercept() request from   ********************k/update end, fail errorMsg = UnknownHostException
+14:22:36.014 ERROR GCLog - http_request: netErrorHandle:com.hihonor.gamecenter.base_net.intercept.IOExceptionWrapper: SafeGuardInterceptor exception when requesting Unable to resolve host "gamecenter-gw-dra.hispace.hihonorcloud.com": No address associated with hostname
+15:54:23.255 INFO  GCLog - PowerKitManager: initPowerKitCompat init ,powerKitTag=e92a6984-ad10-4724-a9d3-85bd88f85602
+15:54:23.286 INFO  GCLog - AccountServiceImpl: startupInit end not login
+15:54:23.290 INFO  GCLog - BootController: executeStartup: grs[IQ], uSit[IQ]
+15:54:23.301 INFO  GCLog - SysConfigChecker: countryCode:IQ,lastCountryCode:
+15:54:23.302 INFO  GCLog - START_UP_PROCESS: BootController boot execute Startup finished isBootReady is: true
+15:54:23.359 INFO  GCLog - LanguageHelper: getLanguageCountryCode:ar
+15:54:23.437 INFO  GCLog - GameCenterBizApplication: observerEvent init report SDK!
+15:54:23.438 INFO  GCLog - ConfigHelper: WhiteList config init
+15:54:23.440 INFO  GCLog - XDownloadInstallHelper: observerEvent UniteCountryCodeFinishEvent!
+15:54:23.449 INFO  GCLog - GameCenterBizApplication: observerEvent BootHotStartupEvent!
+15:54:23.454 INFO  GCLog - START_UP_PROCESS: GameCenterBizApplication onBizInit() boot success pushService.init(), getMainFrameFromNet(true) will execute.
+15:54:23.456 INFO  GCLog - START_UP_PROCESS: GCDownloadInstallServiceStartHelper execute() invoked from is: XDownloadInstallHelper UniteCountryCodeFinishEvent, param isForceUpdate is: false, isContinueAllDownload is: false
+15:54:23.454 ERROR GCLog - com.hihonor.gamecenter.base_report.HiAnalyticsManager: burying point not enable or no init eventId:8810000059
+15:54:23.457 INFO  GCLog - START_UP_PROCESS: MainPageFrameRepository getMainFrameFromNet() invoked from: GameCenterBizApplication onBizInit(), execute isPreLoad is: true
+15:54:23.468 INFO  GCLog - START_UP_PROCESS: GameCenterBizApplication onAppInit preLoadMainPageData() will execute!
+15:54:23.482 INFO  GCLog - LanguageHelper: getLanguage language is: ar
+15:54:23.483 INFO  GCLog - PushServiceImpl: init
+15:54:23.485 INFO  GCLog - LanguageHelper: getLanguageCountryCode:ar
+15:54:23.487 INFO  GCLog - isPersonalRecommend getIntelligentRecommend -> true
+15:54:23.482 INFO  GCLog - ApkFileSha256Manager: init
+15:54:23.482 ERROR GCLog - com.hihonor.gamecenter.base_report.HiAnalyticsManager: burying point not enable or no init eventId:881000000099
+15:54:23.495 ERROR GCLog - HonorDeviceUtils: getAppInfoFromPkgName fail -> com.hihonor.quickgame
+15:54:23.500 ERROR GCLog - MainPageFileHelper: loadFrameDataFile is not exist
+15:54:23.523 INFO  GCLog - GameCenterBizApplication: onBizInit updateToken
+15:54:23.529 INFO  GCLog - PushServiceImpl: updateToken isLoginOut=false start
+15:54:23.546 INFO  GCLog - START_UP_PROCESS: MainPageCacheDataModel loadFrameData() mainFrameData from getFrameConfigCache() load time=51!
+15:54:23.554 ERROR GCLog - MainPageFileHelper: loadContentDataFile is not exist
+15:54:23.609 INFO  GCLog - ApkFileSha256Manager: init() apk fileSha256 success. 
+15:54:23.610 INFO  GCLog - LanguageHelper: getLanguage language is: ar
+15:54:23.617 INFO  GCLog - LanguageHelper: getLanguageCountryCode:ar
+15:54:23.619 INFO  GCLog - isPersonalRecommend getIntelligentRecommend -> true
+15:54:23.621 ERROR GCLog - HonorDeviceUtils: getAppInfoFromPkgName fail -> com.hihonor.quickgame
+15:54:23.627 INFO  GCLog - LanguageHelper: getLanguage language is: ar
+15:54:23.633 INFO  GCLog - LanguageHelper: getLanguageCountryCode:ar
+15:54:23.635 INFO  GCLog - isPersonalRecommend getIntelligentRecommend -> true
+15:54:23.638 ERROR GCLog - HonorDeviceUtils: getAppInfoFromPkgName fail -> com.hihonor.quickgame
+15:54:23.662 INFO  GCLog - LanguageHelper: getLanguage language is: ar
+15:54:23.665 INFO  GCLog - ConfigHelper: whiteList config observer send isRemote=false
+15:54:23.672 INFO  GCLog - LanguageHelper: getLanguageCountryCode:ar
+15:54:23.677 INFO  GCLog - LanguageHelper: getLanguage language is: ar
+15:54:23.679 INFO  GCLog - LanguageHelper: getLanguageCountryCode:ar
+15:54:23.688 INFO  GCLog - isPersonalRecommend getIntelligentRecommend -> true
+15:54:23.691 ERROR GCLog - HonorDeviceUtils: getAppInfoFromPkgName fail -> com.hihonor.quickgame
+15:54:23.716 INFO  GCLog - http_request: SafeGuardInterceptor intercept() request from  *****************nu/query start
+15:54:23.724 INFO  GCLog - http_request: SafeGuardInterceptor intercept() request from  ********************************st/check start
+15:54:23.724 INFO  GCLog - isPersonalRecommend getIntelligentRecommend -> true
+15:54:23.729 INFO  GCLog - http_request: ********************************st/check traceName = a1278d1b-c500-4699-97a3-68a0eea98c82
+15:54:23.729 INFO  GCLog - http_request: *****************nu/query traceName = bdf2a44a-60cf-431b-9104-1e2979735283
+15:54:23.741 INFO  GCLog - http_request: SafeGuardInterceptor intercept() request from  ********************************st/query start
+15:54:23.745 INFO  GCLog - http_request: ********************************st/query traceName = 95ce4f94-bfbd-4a77-a326-a0f519048791
+15:54:23.748 INFO  GCLog - http_request: SafeGuardInterceptor intercept() request from  ***********nfig/get start
+15:54:23.757 INFO  GCLog - http_request: ***********nfig/get traceName = 92ae1563-e68b-473d-aa6c-59efb821636b
+15:54:23.765 INFO  GCLog - PushDownloadHelper: resumeDownloadByNetJobs!
+15:54:23.789 ERROR GCLog - HonorDeviceUtils: getAppInfoFromPkgName fail -> com.hihonor.quickgame
+15:54:23.879 INFO  GCLog - http_request: SafeGuardInterceptor intercept() request from  *********************ry/check start
+15:54:23.884 INFO  GCLog - http_request: *********************ry/check traceName = 133524ed-f7b2-4de7-a698-621ae8001ca8
+15:54:24.630 INFO  GCLog - LanguageHelper: getLanguage language is: ar
+15:54:24.631 INFO  GCLog - LanguageHelper: getLanguageCountryCode:ar
+15:54:24.633 INFO  GCLog - isPersonalRecommend getIntelligentRecommend -> true
+15:54:24.641 ERROR GCLog - HonorDeviceUtils: getAppInfoFromPkgName fail -> com.hihonor.quickgame
+15:54:24.665 INFO  GCLog - http_request: SafeGuardInterceptor intercept() request from  ***********nfig/get start
+15:54:24.668 INFO  GCLog - http_request: ***********nfig/get traceName = 56e262d6-aa28-4695-bb5b-fe91e566005a
+15:54:25.168 INFO  GCLog - START_UP_PROCESS: queryAllAppUpdate() start.
+15:54:25.252 ERROR GCLog - com.hihonor.gamecenter.bu_base.reserve.ReserveHelper: query reserve online info token is null
+15:54:25.353 INFO  GCLog - HnPushProvider: PushServiceImpl getPushStatus : enable true
+15:54:25.356 INFO  GCLog - PushServiceImpl: updateToken:enable:true
+15:54:25.362 INFO  GCLog - PushServiceImpl: updateToken isLoginOut=false bindService
+15:54:25.423 INFO  GCLog - LanguageHelper: getLanguage language is: ar
+15:54:25.433 INFO  GCLog - LanguageHelper: getLanguageCountryCode:ar
+15:54:25.435 INFO  GCLog - isPersonalRecommend getIntelligentRecommend -> true
+15:54:25.436 INFO  GCLog - GetAppInfoHelp: getInstalledPackages end
+15:54:25.437 ERROR GCLog - HonorDeviceUtils: getAppInfoFromPkgName fail -> com.hihonor.quickgame
+15:54:25.453 INFO  GCLog - LanguageHelper: getLanguage language is: ar
+15:54:25.454 INFO  GCLog - LanguageHelper: getLanguageCountryCode:ar
+15:54:25.458 INFO  GCLog - isPersonalRecommend getIntelligentRecommend -> true
+15:54:25.466 ERROR GCLog - HonorDeviceUtils: getAppInfoFromPkgName fail -> com.hihonor.quickgame
+15:54:25.495 INFO  GCLog - http_request: SafeGuardInterceptor intercept() request from  *********************n/upload start
+15:54:25.498 INFO  GCLog - http_request: *********************n/upload traceName = 69d52ee6-3634-437b-b8a3-83e9b07d8976
+15:54:25.514 INFO  GCLog - http_request: SafeGuardInterceptor intercept() request from  ********************k/update start
+15:54:25.520 INFO  GCLog - http_request: ********************k/update traceName = 0254d267-1a73-4b4e-8afd-80f7081f540f
+15:54:25.802 ERROR GCLog - http_request: SafeGuardInterceptor intercept() request from   ********************************st/query end, fail errorMsg = UnknownHostException
+15:54:25.809 ERROR GCLog - http_request: SafeGuardInterceptor intercept() request from   ********************************st/check end, fail errorMsg = UnknownHostException
+15:54:25.812 ERROR GCLog - http_request: SafeGuardInterceptor intercept() request from   ***********nfig/get end, fail errorMsg = UnknownHostException
+15:54:25.809 ERROR GCLog - http_request: SafeGuardInterceptor intercept() request from   *****************nu/query end, fail errorMsg = UnknownHostException
+15:54:25.821 ERROR GCLog - http_request: netErrorHandle:com.hihonor.gamecenter.base_net.intercept.IOExceptionWrapper: SafeGuardInterceptor exception when requesting Unable to resolve host "gamecenter-gw-dra.hispace.hihonorcloud.com": No address associated with hostname
+15:54:25.822 INFO  GCLog - SplashAdFloatBallHelper: getGreyModeConfig() isGreyMode is: null
+15:54:25.822 ERROR GCLog - http_request: netErrorHandle:com.hihonor.gamecenter.base_net.intercept.IOExceptionWrapper: SafeGuardInterceptor exception when requesting Unable to resolve host "gamecenter-gw-dra.hispace.hihonorcloud.com": No address associated with hostname
+15:54:25.826 INFO  GCLog - MinorsModeSetting: localSPKidsMode=false, currentKidsMode=false
+15:54:25.826 INFO  GCLog - GameCenterBizApplication: observerEvent BootMinorsAccountGuardianVerificationEvent: false
+15:54:25.828 INFO  GCLog - MinorsModeSetting: refreshKidsMode=false
+15:54:25.828 INFO  GCLog - GameCenterBizApplication: observerEvent BootChildModeWithNotLoginEvent: false
+15:54:25.837 INFO  GCLog - START_UP_PROCESS: MainPageFrameRepository getMainFrameFromNet() success.
+15:54:25.846 INFO  GCLog - LanguageHelper: getLanguage language is: ar
+15:54:25.852 INFO  GCLog - LanguageHelper: getLanguageCountryCode:ar
+15:54:25.913 INFO  GCLog - START_UP_PROCESS: MainPageFrameRepository getMainFrameFromNet() load data to mem file sp success.
+15:54:25.952 ERROR GCLog - http_request: SafeGuardInterceptor intercept() request from   *********************ry/check end, fail errorMsg = UnknownHostException
+15:54:25.955 ERROR GCLog - BaseReqImpl: queryCountryAvailability error: SafeGuardInterceptor exception when requesting Unable to resolve host "gamecenter-gw-dra.hispace.hihonorcloud.com": No address associated with hostname
+15:54:25.958 INFO  GCLog - AmsLocHelper: checkAccountServ resp.errorCode is: 
+15:54:25.959 INFO  GCLog - AmsLocHelper: start get service: net error
+15:54:25.963 INFO  GCLog - AmsServiceImpl: checkAmsServiceForBootStartupResult: notifyAmsCheckResult,result=Error(errMsg=check service error)
+15:54:25.964 INFO  GCLog - AmsServiceImpl: notifyState: notifyAmsCheckResult，lastAmsCheckResult=BootStartupResult.Unknown is false
+15:54:25.966 ERROR GCLog - START_UP_PROCESS: StartupUseCase handleResult: startup error is: check service error
+15:54:25.966 INFO  GCLog - GameCenterBizApplication: observerEvent AgreementUpdateEvent: false null
+15:54:26.707 ERROR GCLog - http_request: SafeGuardInterceptor intercept() request from   ***********nfig/get end, fail errorMsg = UnknownHostException
+15:54:26.710 ERROR GCLog - http_request: netErrorHandle:com.hihonor.gamecenter.base_net.intercept.IOExceptionWrapper: SafeGuardInterceptor exception when requesting Unable to resolve host "gamecenter-gw-dra.hispace.hihonorcloud.com": No address associated with hostname
+15:54:26.714 INFO  GCLog - LanguageHelper: getLanguage language is: ar
+15:54:26.716 INFO  GCLog - LanguageHelper: getLanguageCountryCode:ar
+15:54:26.718 INFO  GCLog - isPersonalRecommend getIntelligentRecommend -> true
+15:54:26.720 ERROR GCLog - HonorDeviceUtils: getAppInfoFromPkgName fail -> com.hihonor.quickgame
+15:54:26.743 INFO  GCLog - http_request: SafeGuardInterceptor intercept() request from  ****************h/v1/get start
+15:54:26.747 INFO  GCLog - http_request: ****************h/v1/get traceName = 11b0f5fc-96c5-495c-b89d-22fc14ca55c3
+15:54:27.525 ERROR GCLog - http_request: SafeGuardInterceptor intercept() request from   *********************n/upload end, fail errorMsg = UnknownHostException
+15:54:27.530 ERROR GCLog - http_request: netErrorHandle:com.hihonor.gamecenter.base_net.intercept.IOExceptionWrapper: SafeGuardInterceptor exception when requesting Unable to resolve host "gamecenter-gw-dra.hispace.hihonorcloud.com": No address associated with hostname
+15:54:27.537 ERROR GCLog - PushServiceImpl: updateToken bind fail[10999]
+15:54:27.580 ERROR GCLog - AppListParamIntercept: when parse requestBodyStr error Unable to resolve host "gamecenter-gw-dra.hispace.hihonorcloud.com": No address associated with hostname
+15:54:28.803 ERROR GCLog - http_request: SafeGuardInterceptor intercept() request from   ****************h/v1/get end, fail errorMsg = UnknownHostException
+15:54:28.806 ERROR GCLog - http_request: netErrorHandle:com.hihonor.gamecenter.base_net.intercept.IOExceptionWrapper: SafeGuardInterceptor exception when requesting Unable to resolve host "gamecenter-gw-dra.hispace.hihonorcloud.com": No address associated with hostname
+15:54:28.808 INFO  GCLog - AppStartHelper: syncSwitchStateToService: agreeAmsUpdateSwitch = false
+15:54:28.811 INFO  GCLog - LanguageHelper: getLanguage language is: ar
+15:54:28.813 INFO  GCLog - LanguageHelper: getLanguageCountryCode:ar
+15:54:28.815 INFO  GCLog - isPersonalRecommend getIntelligentRecommend -> true
+15:54:28.818 ERROR GCLog - HonorDeviceUtils: getAppInfoFromPkgName fail -> com.hihonor.quickgame
+15:54:28.835 INFO  GCLog - http_request: SafeGuardInterceptor intercept() request from  ***********nfig/get start
+15:54:28.839 INFO  GCLog - http_request: ***********nfig/get traceName = 02d1746d-a0bb-4c96-a1d0-dccd1b56bcbe
+15:54:29.618 ERROR GCLog - http_request: SafeGuardInterceptor intercept() request from   ********************k/update end, fail errorMsg = UnknownHostException
+15:54:29.621 ERROR GCLog - http_request: netErrorHandle:com.hihonor.gamecenter.base_net.intercept.IOExceptionWrapper: SafeGuardInterceptor exception when requesting Unable to resolve host "gamecenter-gw-dra.hispace.hihonorcloud.com": No address associated with hostname
+15:54:30.891 ERROR GCLog - http_request: SafeGuardInterceptor intercept() request from   ***********nfig/get end, fail errorMsg = UnknownHostException
+15:54:30.893 ERROR GCLog - http_request: netErrorHandle:com.hihonor.gamecenter.base_net.intercept.IOExceptionWrapper: SafeGuardInterceptor exception when requesting Unable to resolve host "gamecenter-gw-dra.hispace.hihonorcloud.com": No address associated with hostname
+16:41:40.895 INFO  GCLog - PowerKitManager: initPowerKitCompat init ,powerKitTag=41cd2040-ccd1-45ea-bef9-088a86fdd9e6
+16:41:42.705 INFO  GCLog - START_UP_PROCESS: GameCenterBizApplication onAppInit preLoadMainPageData() will execute!
+16:41:42.942 INFO  GCLog - GameAssistantImpl: udid is agree for SDK: 1
+16:41:42.948 INFO  GCLog - START_UP_PROCESS: AmsServiceImpl getUdidSignStateByGameAssistant state=1
+16:41:42.951 INFO  GCLog - START_UP_PROCESS: BootController appStartInit() invoked by GameCenterBizApplication onAppInit, boot hasReady: -1
+16:41:42.953 INFO  GCLog - START_UP_PROCESS: BootController startupBoot() invoked from: BootController appStartInit()
+16:41:42.956 INFO  GCLog - RegisterReceiverUseCase: Register user receiver execute
+16:41:42.974 INFO  GCLog - START_UP_PROCESS: checkSignLoginState from BootController startupBoot()
+16:41:42.980 INFO  GCLog - AccountServiceImpl: startupInit
+16:41:43.057 ERROR GCLog - MainPageFileHelper: loadFrameDataFile is not exist
+16:41:43.178 INFO  GCLog - START_UP_PROCESS: MainPageCacheDataModel loadFrameData() mainFrameData from getFrameConfigCache() load time=446!
+16:41:43.191 ERROR GCLog - MainPageFileHelper: loadContentDataFile is not exist
+16:41:44.744 INFO  GCLog - AccountServiceImpl: startupInit end not login
+16:41:44.750 INFO  GCLog - SysConfigChecker: countryCode:IQ,lastCountryCode:
+16:41:44.757 INFO  GCLog - BootController: executeStartup: grs[IQ], uSit[IQ]
+16:41:44.780 ERROR GCLog - GameCenterBizApplication: get advertisement info failed, message:getAdvertisingIdInfo(context) must not be null
+16:41:44.797 INFO  GCLog - START_UP_PROCESS: BootController boot execute Startup finished isBootReady is: true
+16:41:44.786 INFO  GCLog - LanguageHelper: getLanguageCountryCode:ar
+16:41:44.861 INFO  GCLog - GameCenterBizApplication: observerEvent init report SDK!
+16:41:44.863 INFO  GCLog - ConfigHelper: WhiteList config init
+16:41:44.864 INFO  GCLog - XDownloadInstallHelper: observerEvent UniteCountryCodeFinishEvent!
+16:41:44.875 INFO  GCLog - GameCenterBizApplication: observerEvent BootHotStartupEvent!
+16:41:44.887 INFO  GCLog - START_UP_PROCESS: GameCenterBizApplication onBizInit() boot success pushService.init(), getMainFrameFromNet(true) will execute.
+16:41:44.889 INFO  GCLog - START_UP_PROCESS: GCDownloadInstallServiceStartHelper execute() invoked from is: XDownloadInstallHelper UniteCountryCodeFinishEvent, param isForceUpdate is: false, isContinueAllDownload is: false
+16:41:44.909 INFO  GCLog - ApkFileSha256Manager: init
+16:41:44.915 ERROR GCLog - com.hihonor.gamecenter.base_report.HiAnalyticsManager: burying point not enable or no init eventId:8810000059
+16:41:44.917 INFO  GCLog - START_UP_PROCESS: MainPageFrameRepository getMainFrameFromNet() invoked from: GameCenterBizApplication onBizInit(), execute isPreLoad is: true
+16:41:44.922 INFO  GCLog - LanguageHelper: getLanguage language is: ar
+16:41:44.925 INFO  GCLog - LanguageHelper: getLanguageCountryCode:ar
+16:41:44.929 INFO  GCLog - isPersonalRecommend getIntelligentRecommend -> true
+16:41:44.944 INFO  GCLog - PushServiceImpl: init
+16:41:44.945 ERROR GCLog - HonorDeviceUtils: getAppInfoFromPkgName fail -> com.hihonor.quickgame
+16:41:44.954 ERROR GCLog - com.hihonor.gamecenter.base_report.HiAnalyticsManager: burying point not enable or no init eventId:881000000099
+16:41:45.005 INFO  GCLog - GameCenterBizApplication: onBizInit updateToken
+16:41:45.018 INFO  GCLog - PushServiceImpl: updateToken isLoginOut=false start
+16:41:45.316 INFO  GCLog - LanguageHelper: getLanguage language is: ar
+16:41:45.319 INFO  GCLog - LanguageHelper: getLanguage language is: ar
+16:41:45.324 INFO  GCLog - LanguageHelper: getLanguageCountryCode:ar
+16:41:45.326 INFO  GCLog - LanguageHelper: getLanguageCountryCode:ar
+16:41:45.328 INFO  GCLog - isPersonalRecommend getIntelligentRecommend -> true
+16:41:45.330 INFO  GCLog - isPersonalRecommend getIntelligentRecommend -> true
+16:41:45.333 ERROR GCLog - HonorDeviceUtils: getAppInfoFromPkgName fail -> com.hihonor.quickgame
+16:41:45.335 ERROR GCLog - HonorDeviceUtils: getAppInfoFromPkgName fail -> com.hihonor.quickgame
+16:41:45.567 INFO  GCLog - LanguageHelper: getLanguage language is: ar
+16:41:45.577 INFO  GCLog - LanguageHelper: getLanguageCountryCode:ar
+16:41:45.587 INFO  GCLog - isPersonalRecommend getIntelligentRecommend -> true
+16:41:45.594 ERROR GCLog - HonorDeviceUtils: getAppInfoFromPkgName fail -> com.hihonor.quickgame
+16:41:45.679 INFO  GCLog - ConfigHelper: whiteList config observer send isRemote=false
+16:41:45.692 INFO  GCLog - http_request: SafeGuardInterceptor intercept() request from  *********************ry/check start
+16:41:45.696 INFO  GCLog - PushDownloadHelper: resumeDownloadByNetJobs!
+16:41:45.697 INFO  GCLog - http_request: *********************ry/check traceName = daad87f6-e2d8-482e-9e44-2d3f52df8007
+16:41:45.707 INFO  GCLog - http_request: SafeGuardInterceptor intercept() request from  ***********nfig/get start
+16:41:45.715 INFO  GCLog - http_request: SafeGuardInterceptor intercept() request from  *****************nu/query start
+16:41:45.718 INFO  GCLog - http_request: *****************nu/query traceName = 559dff76-9865-4b4d-9063-90832a31a040
+16:41:45.719 INFO  GCLog - http_request: SafeGuardInterceptor intercept() request from  ********************************st/check start
+16:41:45.723 INFO  GCLog - LanguageHelper: getLanguage language is: ar
+16:41:45.725 INFO  GCLog - LanguageHelper: getLanguageCountryCode:ar
+16:41:45.726 INFO  GCLog - http_request: ********************************st/check traceName = 45e19a0c-3ae8-438e-9934-42f7fe284f30
+16:41:45.727 INFO  GCLog - isPersonalRecommend getIntelligentRecommend -> true
+16:41:45.729 ERROR GCLog - HonorDeviceUtils: getAppInfoFromPkgName fail -> com.hihonor.quickgame
+16:41:45.731 INFO  GCLog - http_request: ***********nfig/get traceName = d531829a-cabd-4716-ba2f-e9db3969fb70
+16:41:45.801 INFO  GCLog - http_request: SafeGuardInterceptor intercept() request from  ********************************st/query start
+16:41:45.893 INFO  GCLog - http_request: ********************************st/query traceName = 1bfa98ab-9a88-4dc4-af1f-beb8292a7c5b
+16:41:46.196 INFO  GCLog - ApkFileSha256Manager: init() apk fileSha256 success. 
+16:41:47.845 ERROR GCLog - http_request: SafeGuardInterceptor intercept() request from   ********************************st/check end, fail errorMsg = UnknownHostException
+16:41:47.852 ERROR GCLog - http_request: SafeGuardInterceptor intercept() request from   *****************nu/query end, fail errorMsg = UnknownHostException
+16:41:47.888 ERROR GCLog - http_request: netErrorHandle:com.hihonor.gamecenter.base_net.intercept.IOExceptionWrapper: SafeGuardInterceptor exception when requesting Unable to resolve host "gamecenter-gw-dra.hispace.hihonorcloud.com": No address associated with hostname
+16:41:47.937 ERROR GCLog - http_request: SafeGuardInterceptor intercept() request from   ***********nfig/get end, fail errorMsg = UnknownHostException
+16:41:47.942 ERROR GCLog - http_request: SafeGuardInterceptor intercept() request from   *********************ry/check end, fail errorMsg = UnknownHostException
+16:41:47.944 ERROR GCLog - http_request: netErrorHandle:com.hihonor.gamecenter.base_net.intercept.IOExceptionWrapper: SafeGuardInterceptor exception when requesting Unable to resolve host "gamecenter-gw-dra.hispace.hihonorcloud.com": No address associated with hostname
+16:41:47.947 INFO  GCLog - SplashAdFloatBallHelper: getGreyModeConfig() isGreyMode is: null
+16:41:47.949 ERROR GCLog - BaseReqImpl: queryCountryAvailability error: SafeGuardInterceptor exception when requesting Unable to resolve host "gamecenter-gw-dra.hispace.hihonorcloud.com": No address associated with hostname
+16:41:47.951 INFO  GCLog - AmsLocHelper: checkAccountServ resp.errorCode is: 
+16:41:47.952 INFO  GCLog - AmsLocHelper: start get service: net error
+16:41:47.959 INFO  GCLog - MinorsModeSetting: localSPKidsMode=false, currentKidsMode=false
+16:41:47.988 INFO  GCLog - MinorsModeSetting: refreshKidsMode=false
+16:41:47.994 ERROR GCLog - http_request: SafeGuardInterceptor intercept() request from   ********************************st/query end, fail errorMsg = UnknownHostException
+16:41:48.072 INFO  GCLog - LanguageHelper: getLanguage language is: ar
+16:41:48.073 INFO  GCLog - LanguageHelper: getLanguageCountryCode:ar
+16:41:48.076 INFO  GCLog - isPersonalRecommend getIntelligentRecommend -> true
+16:41:48.079 ERROR GCLog - HonorDeviceUtils: getAppInfoFromPkgName fail -> com.hihonor.quickgame
+16:41:48.102 INFO  GCLog - http_request: SafeGuardInterceptor intercept() request from  ***********nfig/get start
+16:41:48.108 INFO  GCLog - http_request: ***********nfig/get traceName = 9eaf7583-0488-4571-bceb-5c61733a6316
+16:41:48.697 INFO  GCLog - START_UP_PROCESS: MainPageFrameRepository getMainFrameFromNet() success.
+16:41:50.172 ERROR GCLog - http_request: SafeGuardInterceptor intercept() request from   ***********nfig/get end, fail errorMsg = UnknownHostException
+16:41:50.180 ERROR GCLog - http_request: netErrorHandle:com.hihonor.gamecenter.base_net.intercept.IOExceptionWrapper: SafeGuardInterceptor exception when requesting Unable to resolve host "gamecenter-gw-dra.hispace.hihonorcloud.com": No address associated with hostname
+16:41:50.191 INFO  GCLog - LanguageHelper: getLanguage language is: ar
+16:41:50.192 INFO  GCLog - LanguageHelper: getLanguageCountryCode:ar
+16:41:50.197 INFO  GCLog - isPersonalRecommend getIntelligentRecommend -> true
+16:41:50.204 ERROR GCLog - HonorDeviceUtils: getAppInfoFromPkgName fail -> com.hihonor.quickgame
+16:41:50.230 INFO  GCLog - http_request: SafeGuardInterceptor intercept() request from  ****************h/v1/get start
+16:41:50.235 INFO  GCLog - http_request: ****************h/v1/get traceName = 23a484e3-fecb-436d-bea8-06a275a44a48
+16:41:50.478 INFO  GCLog - START_UP_PROCESS: queryAllAppUpdate() start.
+16:41:50.485 ERROR GCLog - com.hihonor.gamecenter.bu_base.reserve.ReserveHelper: query reserve online info token is null
+16:41:50.488 INFO  GCLog - GameCenterBizApplication: observerEvent BootMinorsAccountGuardianVerificationEvent: false
+16:41:50.491 INFO  GCLog - GameCenterBizApplication: observerEvent BootChildModeWithNotLoginEvent: false
+16:41:50.497 INFO  GCLog - AmsServiceImpl: checkAmsServiceForBootStartupResult: notifyAmsCheckResult,result=Error(errMsg=check service error)
+16:41:50.499 INFO  GCLog - AmsServiceImpl: notifyState: notifyAmsCheckResult，lastAmsCheckResult=BootStartupResult.Unknown is false
+16:41:50.501 ERROR GCLog - START_UP_PROCESS: StartupUseCase handleResult: startup error is: check service error
+16:41:50.503 INFO  GCLog - LanguageHelper: getLanguage language is: ar
+16:41:50.504 INFO  GCLog - LanguageHelper: getLanguageCountryCode:ar
+16:41:50.610 INFO  GCLog - START_UP_PROCESS: MainPageFrameRepository getMainFrameFromNet() load data to mem file sp success.
+16:41:50.613 INFO  GCLog - GameCenterBizApplication: observerEvent AgreementUpdateEvent: false null
+16:41:50.644 INFO  GCLog - HnPushProvider: PushServiceImpl getPushStatus : enable true
+16:41:50.650 INFO  GCLog - PushServiceImpl: updateToken:enable:true
+16:41:50.662 INFO  GCLog - PushServiceImpl: updateToken isLoginOut=false bindService
+16:41:50.845 INFO  GCLog - LanguageHelper: getLanguage language is: ar
+16:41:50.851 INFO  GCLog - LanguageHelper: getLanguageCountryCode:ar
+16:41:50.856 INFO  GCLog - isPersonalRecommend getIntelligentRecommend -> true
+16:41:50.862 ERROR GCLog - HonorDeviceUtils: getAppInfoFromPkgName fail -> com.hihonor.quickgame
+16:41:50.929 INFO  GCLog - GetAppInfoHelp: getInstalledPackages end
+16:41:50.939 INFO  GCLog - LanguageHelper: getLanguage language is: ar
+16:41:50.941 INFO  GCLog - LanguageHelper: getLanguageCountryCode:ar
+16:41:50.946 INFO  GCLog - isPersonalRecommend getIntelligentRecommend -> true
+16:41:50.949 ERROR GCLog - HonorDeviceUtils: getAppInfoFromPkgName fail -> com.hihonor.quickgame
+16:41:50.977 INFO  GCLog - http_request: SafeGuardInterceptor intercept() request from  *********************n/upload start
+16:41:50.985 INFO  GCLog - http_request: *********************n/upload traceName = db9a63aa-8ebd-47a8-b77a-3864a07c64cc
+16:41:51.040 INFO  GCLog - http_request: SafeGuardInterceptor intercept() request from  ********************k/update start
+16:41:51.055 INFO  GCLog - http_request: ********************k/update traceName = 81cbe35d-eb25-4e0b-819a-2c0b86e945de
+16:41:52.290 ERROR GCLog - http_request: SafeGuardInterceptor intercept() request from   ****************h/v1/get end, fail errorMsg = UnknownHostException
+16:41:52.296 ERROR GCLog - http_request: netErrorHandle:com.hihonor.gamecenter.base_net.intercept.IOExceptionWrapper: SafeGuardInterceptor exception when requesting Unable to resolve host "gamecenter-gw-dra.hispace.hihonorcloud.com": No address associated with hostname
+16:41:52.298 INFO  GCLog - AppStartHelper: syncSwitchStateToService: agreeAmsUpdateSwitch = false
+16:41:52.301 INFO  GCLog - LanguageHelper: getLanguage language is: ar
+16:41:52.303 INFO  GCLog - LanguageHelper: getLanguageCountryCode:ar
+16:41:52.305 INFO  GCLog - isPersonalRecommend getIntelligentRecommend -> true
+16:41:52.307 ERROR GCLog - HonorDeviceUtils: getAppInfoFromPkgName fail -> com.hihonor.quickgame
+16:41:52.324 INFO  GCLog - http_request: SafeGuardInterceptor intercept() request from  ***********nfig/get start
+16:41:52.327 INFO  GCLog - http_request: ***********nfig/get traceName = 570d7290-8ab7-404e-85c9-7db2c38132f1
+16:41:53.045 ERROR GCLog - http_request: SafeGuardInterceptor intercept() request from   *********************n/upload end, fail errorMsg = UnknownHostException
+16:41:53.048 ERROR GCLog - http_request: netErrorHandle:com.hihonor.gamecenter.base_net.intercept.IOExceptionWrapper: SafeGuardInterceptor exception when requesting Unable to resolve host "gamecenter-gw-dra.hispace.hihonorcloud.com": No address associated with hostname
+16:41:53.049 ERROR GCLog - PushServiceImpl: updateToken bind fail[10999]
+16:41:53.127 ERROR GCLog - AppListParamIntercept: when parse requestBodyStr error Unable to resolve host "gamecenter-gw-dra.hispace.hihonorcloud.com": No address associated with hostname
+16:41:54.391 ERROR GCLog - http_request: SafeGuardInterceptor intercept() request from   ***********nfig/get end, fail errorMsg = UnknownHostException
+16:41:54.403 ERROR GCLog - http_request: netErrorHandle:com.hihonor.gamecenter.base_net.intercept.IOExceptionWrapper: SafeGuardInterceptor exception when requesting Unable to resolve host "gamecenter-gw-dra.hispace.hihonorcloud.com": No address associated with hostname
+16:41:55.179 ERROR GCLog - http_request: SafeGuardInterceptor intercept() request from   ********************k/update end, fail errorMsg = UnknownHostException
+16:41:55.182 ERROR GCLog - http_request: netErrorHandle:com.hihonor.gamecenter.base_net.intercept.IOExceptionWrapper: SafeGuardInterceptor exception when requesting Unable to resolve host "gamecenter-gw-dra.hispace.hihonorcloud.com": No address associated with hostname
+16:47:40.527 INFO  GCLog - ScreenReceiver: action: android.intent.action.SCREEN_ON
