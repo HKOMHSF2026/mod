@@ -1,0 +1,42 @@
+{
+	"format_version": 2,
+	"header": {
+		"name": "§l§bAll In One Tool Add-on",
+		"description": "§6§lMade By§f: §9Mohamed §cWageh",
+		"uuid": "bb4b98d8-f071-4edf-ba1e-597fbc566899",
+		"version": [
+			1,
+			0,
+			0
+		],
+		"min_engine_version": [
+			1,
+			20,
+			0
+		]
+	},
+	"modules": [
+		{
+			"uuid": "d2c2180b-0fc2-4a1a-8c82-75a47e2878d3",
+			"version": [1, 0, 0],
+			"type": "script",
+			"language": "javascript",
+			"entry": "scripts/main.js"
+		}
+	],
+	"capabilities": ["script_eval"],
+	"dependencies": [
+		{
+			"version": [
+				1,
+				0,
+				0
+			],
+			"uuid": "b98d68e0-5d50-45b6-b1e8-2bd35df54eb6"
+		},
+		{
+            "module_name": "@minecraft/server",
+            "version": "1.13.0"
+        }
+	]
+}
