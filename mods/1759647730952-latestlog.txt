@@ -1,0 +1,312 @@
+--------- Starting game with Launcher Debug!
+Info: Launcher version: gladiolus-20250118-c04e3af-v3_openjdk
+Info: Architecture: arm64
+Info: Device model: TECNO TECNO KI5k
+Info: API version: 31
+Info: Selected Minecraft version: b1.6.6
+Info: Custom Java arguments: ""
+Added custom env: TMPDIR=/data/user/0/net.kdt.pojavlaunch/cache
+Added custom env: AWTSTUB_WIDTH=1540
+Added custom env: FORCE_VSYNC=false
+Added custom env: POJAV_NATIVEDIR=/data/app/~~oyL_h0dib4eVHXel4tUFpA==/net.kdt.pojavlaunch-jQgVw7lSYjUscnD60fRrUQ==/lib/arm64
+Added custom env: LIBGL_MIPMAP=3
+Added custom env: allow_higher_compat_version=true
+Added custom env: MESA_GLSL_CACHE_DIR=/data/user/0/net.kdt.pojavlaunch/cache
+Added custom env: HOME=/storage/emulated/0/Android/data/net.kdt.pojavlaunch/files
+Added custom env: PATH=/data/user/0/net.kdt.pojavlaunch/runtimes/Internal/bin:/product/bin:/apex/com.android.runtime/bin:/apex/com.android.art/bin:/system_ext/bin:/system/bin:/system/xbin:/odm/bin:/vendor/bin:/vendor/xbin
+Added custom env: LIBGL_NOINTOVLHACK=1
+Added custom env: force_glsl_extensions_warn=true
+Added custom env: LIBGL_NORMALIZE=1
+Added custom env: POJAV_VSYNC_IN_ZINK=1
+Added custom env: LD_LIBRARY_PATH=/data/user/0/net.kdt.pojavlaunch/runtimes/Internal/lib/aarch64/jli:/data/user/0/net.kdt.pojavlaunch/runtimes/Internal/lib/aarch64:/system/lib64:/vendor/lib64:/vendor/lib64/hw:/data/app/~~oyL_h0dib4eVHXel4tUFpA==/net.kdt.pojavlaunch-jQgVw7lSYjUscnD60fRrUQ==/lib/arm64
+Added custom env: LIBGL_NOERROR=1
+Added custom env: POJAV_RENDERER=opengles2
+Added custom env: LIBGL_ES=1
+Added custom env: VTEST_SOCKET_NAME=/data/user/0/net.kdt.pojavlaunch/cache/.virgl_test
+Added custom env: MESA_LOADER_DRIVER_OVERRIDE=zink
+Added custom env: JAVA_HOME=/data/user/0/net.kdt.pojavlaunch/runtimes/Internal
+Added custom env: allow_glsl_extension_directive_midshader=true
+Added custom env: AWTSTUB_HEIGHT=720
+Initialising gl4es
+v1.1.5 built on Jul 14 2024 19:34:14
+Using GLES 1.1 backend
+loaded: libGLESv1_CM.so
+loaded: libEGL.so
+Using GLES 1.1 backend
+Hardware Full NPOT detected and used
+Extension GL_EXT_blend_minmax  detected and used
+Extension GL_OES_framebuffer_object  detected and used
+Extension GL_OES_point_sprite  detected and used
+Extension GL_OES_point_size_array  detected
+Extension GL_OES_texture_cube_map  detected and used
+Extension GL_OES_blend_subtract  detected and used
+Extension GL_OES_blend_func_separate  detected and used
+Extension GL_OES_blend_equation_separate  detected and used
+Extension GL_OES_texture_mirrored_repeat  detected and used
+Extension GL_OES_mapbuffer  detected
+Extension GL_OES_element_index_uint  detected and used
+Extension GL_OES_packed_depth_stencil  detected and used
+Extension GL_OES_depth24  detected and used
+Extension GL_OES_rgb8_rgba8  detected and used
+Extension GL_EXT_texture_format_BGRA8888  detected and used
+Extension GL_OES_draw_texture  detected and used
+Max texture size: 16383
+Texture Units: 8/8 (hardware: 8), Max lights: 8, Max planes: 1
+Extension GL_EXT_texture_filter_anisotropic  detected and used
+Max Anisotropic filtering: 16
+Hardware vendor is ARM
+Max Color Attachments: 1 / Draw buffers: 1
+sRGB surface supported
+EGLImage to Texture2D supported
+EGLImage to RenderBuffer supported
+ignore MipMap
+glGetError() always return GL_NOERROR
+Targeting OpenGL 1.5
+No hack in shader converter to define overloaded function with int
+Not trying to batch small subsequent glDrawXXXX
+glXMakeCurrent FBO workaround enabled
+FBO workaround for using binded texture enabled
+Force texture for Attachment color0 on FBO
+Hack to trigger a SwapBuffers when a Full Framebuffer Blit on default FBO is done
+Force normals to be normalized on FPE shaders
+glX Will try to recycle EGL Surface
+Current folder is:/
+Not using PSA (prgbin_n=0, notexarray=0)
+--------- beginning of main
+
+I/jrelog  (31197): dlopen libgl4es_114.so success
+
+I/jrelog  (31197): dlopen /data/user/0/net.kdt.pojavlaunch/runtimes/Internal/lib/aarch64/jli/libjli.so success
+
+I/jrelog  (31197): dlopen libjvm.so failed: dlopen failed: library "libjvm.so" not found
+
+I/jrelog  (31197): dlopen /data/user/0/net.kdt.pojavlaunch/runtimes/Internal/lib/aarch64/server/libjvm.so success
+
+I/jrelog  (31197): dlopen /data/user/0/net.kdt.pojavlaunch/runtimes/Internal/lib/aarch64/libverify.so success
+
+I/jrelog  (31197): dlopen /data/user/0/net.kdt.pojavlaunch/runtimes/Internal/lib/aarch64/libjava.so success
+
+I/jrelog  (31197): dlopen /data/user/0/net.kdt.pojavlaunch/runtimes/Internal/lib/aarch64/libnet.so success
+
+I/jrelog  (31197): dlopen /data/user/0/net.kdt.pojavlaunch/runtimes/Internal/lib/aarch64/libnio.so success
+
+I/jrelog  (31197): dlopen /data/user/0/net.kdt.pojavlaunch/runtimes/Internal/lib/aarch64/libawt.so success
+
+I/jrelog  (31197): dlopen /data/user/0/net.kdt.pojavlaunch/runtimes/Internal/lib/aarch64/libawt_headless.so success
+
+I/jrelog  (31197): dlopen /data/user/0/net.kdt.pojavlaunch/runtimes/Internal/lib/aarch64/libfreetype.so success
+
+I/jrelog  (31197): dlopen /data/user/0/net.kdt.pojavlaunch/runtimes/Internal/lib/aarch64/libfontmanager.so success
+
+I/jrelog  (31197): dlopen /data/user/0/net.kdt.pojavlaunch/runtimes/Internal/lib/aarch64/libzip.so success
+
+I/jrelog  (31197): dlopen /data/user/0/net.kdt.pojavlaunch/runtimes/Internal/lib/aarch64/libsctp.so success
+
+I/jrelog  (31197): dlopen /data/user/0/net.kdt.pojavlaunch/runtimes/Internal/lib/aarch64/libjawt.so success
+I/jrelog  (31197): dlopen /data/user/0/net.kdt.pojavlaunch/runtimes/Internal/lib/aarch64/libawt.so success
+
+I/jrelog  (31197): dlopen /data/user/0/net.kdt.pojavlaunch/runtimes/Internal/lib/aarch64/libmanagement.so success
+
+I/jrelog  (31197): dlopen /data/user/0/net.kdt.pojavlaunch/runtimes/Internal/lib/aarch64/libjsound.so success
+
+I/jrelog  (31197): dlopen /data/user/0/net.kdt.pojavlaunch/runtimes/Internal/lib/aarch64/libj2pcsc.so success
+
+I/jrelog  (31197): dlopen /data/user/0/net.kdt.pojavlaunch/runtimes/Internal/lib/aarch64/libsunec.so success
+
+I/jrelog  (31197): dlopen /data/user/0/net.kdt.pojavlaunch/runtimes/Internal/lib/aarch64/libawt_xawt.so success
+
+I/jrelog  (31197): dlopen /data/user/0/net.kdt.pojavlaunch/runtimes/Internal/lib/aarch64/server/libjvm.so success
+I/jrelog  (31197): dlopen /data/user/0/net.kdt.pojavlaunch/runtimes/Internal/lib/aarch64/jli/libjli.so success
+
+I/jrelog  (31197): dlopen /data/user/0/net.kdt.pojavlaunch/runtimes/Internal/lib/aarch64/liblcms.so success
+
+I/jrelog  (31197): dlopen /data/user/0/net.kdt.pojavlaunch/runtimes/Internal/lib/aarch64/libjsdt.so success
+
+I/jrelog  (31197): dlopen /data/user/0/net.kdt.pojavlaunch/runtimes/Internal/lib/aarch64/libjsig.so success
+I/jrelog  (31197): dlopen /data/user/0/net.kdt.pojavlaunch/runtimes/Internal/lib/aarch64/libdt_socket.so success
+I/jrelog  (31197): dlopen /data/user/0/net.kdt.pojavlaunch/runtimes/Internal/lib/aarch64/libjava_crw_demo.so success
+I/jrelog  (31197): dlopen /data/user/0/net.kdt.pojavlaunch/runtimes/Internal/lib/aarch64/libnet.so success
+
+I/jrelog  (31197): dlopen /data/user/0/net.kdt.pojavlaunch/runtimes/Internal/lib/aarch64/libjpeg.so success
+I/jrelog  (31197): dlopen /data/user/0/net.kdt.pojavlaunch/runtimes/Internal/lib/aarch64/libfreetype.so success
+I/jrelog  (31197): dlopen /data/user/0/net.kdt.pojavlaunch/runtimes/Internal/lib/aarch64/libawt_headless.so success
+
+I/jrelog  (31197): dlopen /data/user/0/net.kdt.pojavlaunch/runtimes/Internal/lib/aarch64/libjdwp.so success
+
+I/jrelog  (31197): dlopen /data/user/0/net.kdt.pojavlaunch/runtimes/Internal/lib/aarch64/libhprof.so success
+
+I/jrelog  (31197): dlopen /data/user/0/net.kdt.pojavlaunch/runtimes/Internal/lib/aarch64/libunpack.so success
+
+I/jrelog  (31197): dlopen /data/user/0/net.kdt.pojavlaunch/runtimes/Internal/lib/aarch64/libmlib_image.so success
+
+I/jrelog  (31197): dlopen /data/user/0/net.kdt.pojavlaunch/runtimes/Internal/lib/aarch64/libtinyiconv.so success
+
+I/jrelog  (31197): dlopen /data/user/0/net.kdt.pojavlaunch/runtimes/Internal/lib/aarch64/libjaas_unix.so success
+
+I/jrelog  (31197): dlopen /data/user/0/net.kdt.pojavlaunch/runtimes/Internal/lib/aarch64/libinstrument.so success
+I/jrelog  (31197): dlopen /data/user/0/net.kdt.pojavlaunch/runtimes/Internal/lib/aarch64/libfontmanager.so success
+I/jrelog  (31197): dlopen /data/user/0/net.kdt.pojavlaunch/runtimes/Internal/lib/aarch64/libverify.so success
+
+I/jrelog  (31197): dlopen /data/user/0/net.kdt.pojavlaunch/runtimes/Internal/lib/aarch64/libj2pkcs11.so success
+
+I/jrelog  (31197): dlopen /data/user/0/net.kdt.pojavlaunch/runtimes/Internal/lib/aarch64/libjava.so success
+I/jrelog  (31197): dlopen /data/user/0/net.kdt.pojavlaunch/runtimes/Internal/lib/aarch64/libnio.so success
+
+I/jrelog  (31197): dlopen /data/user/0/net.kdt.pojavlaunch/runtimes/Internal/lib/aarch64/libnpt.so success
+
+I/jrelog  (31197): dlopen /data/user/0/net.kdt.pojavlaunch/runtimes/Internal/lib/aarch64/libj2gss.so success
+
+I/jrelog  (31197): dlopen /data/app/~~oyL_h0dib4eVHXel4tUFpA==/net.kdt.pojavlaunch-jQgVw7lSYjUscnD60fRrUQ==/lib/arm64/libopenal.so success
+
+I/jrelog  (31197): Done processing args
+
+I/jrelog  (31197): Found JLI lib
+I/jrelog  (31197): Calling JLI_Launch
+
+OpenJDK 64-Bit Server VM warning: No monotonic clock was available - timed services may be adversely affected if the time-of-day clock changes
+سبت 24, 2025 1:32:59 م net.minecraft.launchwrapper.LogWrapper log
+INFO: Using tweak class name net.minecraft.launchwrapper.VanillaTweaker
+سبت 24, 2025 1:33:00 م net.minecraft.launchwrapper.LogWrapper log
+INFO: Launching wrapped minecraft
+CacioComponentPeer::setZOrder: NOT YET IMPLEMENTED
+16 achievements
+148 recipes
+Turning of ImageIO disk-caching
+Loading current icons for window from: /storage/emulated/0/Android/data/net.kdt.pojavlaunch/files/.minecraft/assets/icons/icon_16x16.png and /storage/emulated/0/Android/data/net.kdt.pojavlaunch/files/.minecraft/assets/icons/icon_32x32.png
+javax.imageio.IIOException: Can't read input file!
+	at javax.imageio.ImageIO.read(Unknown Source)
+	at net.minecraft.launchwrapper.injector.VanillaTweakInjector.loadIcon(VanillaTweakInjector.java:130)
+	at net.minecraft.launchwrapper.injector.VanillaTweakInjector.loadIconsOnFrames(VanillaTweakInjector.java:107)
+	at net.minecraft.launchwrapper.injector.VanillaTweakInjector.inject(VanillaTweakInjector.java:94)
+	at net.minecraft.client.Minecraft.main(SourceFile:1872)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at net.minecraft.launchwrapper.Launch.launch(Launch.java:57)
+	at net.minecraft.launchwrapper.Launch.main(Launch.java:18)
+Setting gameDir to: /storage/emulated/0/Android/data/net.kdt.pojavlaunch/files/.minecraft
+Registered forkAndExec
+[LWJGL] [ERROR] Incompatible Java and native library versions detected.
+Possible reasons:
+	a) -Djava.library.path is set to a folder containing shared libraries of an older LWJGL version.
+	b) The classpath contains jar files of an older LWJGL version.
+Possible solutions:
+	a) Make sure to not set -Djava.library.path (it is not needed for developing with LWJGL 3) or make
+	   sure the folder it points to contains the shared libraries of the correct LWJGL version.
+	b) Check the classpath and make sure to only have jar files of the same LWJGL version in it.
+[LWJGL] Failed to load a library. Possible solutions:
+	a) Add the directory that contains the shared library to -Djava.library.path or -Dorg.lwjgl.librarypath.
+	b) Add the JAR that contains the shared library to the classpath.
+[LWJGL] Enable debug mode with -Dorg.lwjgl.util.Debug=true for better diagnostics.
+[LWJGL] Enable the SharedLibraryLoader debug mode with -Dorg.lwjgl.util.DebugLoader=true for better diagnostics.
+LWJGLX: GL caps init
+[LWJGL] [ERROR] Incompatible Java and native library versions detected.
+Possible reasons:
+	a) -Djava.library.path is set to a folder containing shared libraries of an older LWJGL version.
+	b) The classpath contains jar files of an older LWJGL version.
+Possible solutions:
+	a) Make sure to not set -Djava.library.path (it is not needed for developing with LWJGL 3) or make
+	   sure the folder it points to contains the shared libraries of the correct LWJGL version.
+	b) Check the classpath and make sure to only have jar files of the same LWJGL version in it.
+EGLBridge: Binding to OpenGL ES
+LWJGLX: ready-handle context created
+Grab: false
+
+Starting up SoundSystem...
+Initializing LWJGL OpenAL
+    (The LWJGL binding of OpenAL.  For more information, see http://www.lwjgl.org)
+[LWJGL] [ERROR] Incompatible Java and native library versions detected.
+Possible reasons:
+	a) -Djava.library.path is set to a folder containing shared libraries of an older LWJGL version.
+	b) The classpath contains jar files of an older LWJGL version.
+Possible solutions:
+	a) Make sure to not set -Djava.library.path (it is not needed for developing with LWJGL 3) or make
+	   sure the folder it points to contains the shared libraries of the correct LWJGL version.
+	b) Check the classpath and make sure to only have jar files of the same LWJGL version in it.
+[ALSOFT] (EE) Failed to set real-time priority for thread: Operation not permitted (1)
+OpenAL initialized.
+
+I/NativeInput(31197): Input ready: 1
+
+GLFW: Set size for window 505677958752, width=1540, height=720
+Failed to add READ_ME_I_AM_VERY_IMPORTANT
+Failed to add pack.mcmeta
+java.io.FileNotFoundException: http://s3.amazonaws.com/MinecraftResources/
+	at sun.net.www.protocol.http.HttpURLConnection.getInputStream0(Unknown Source)
+	at sun.net.www.protocol.http.HttpURLConnection.getInputStream(Unknown Source)
+	at java.net.URL.openStream(Unknown Source)
+	at cx.run(SourceFile:28)
+Grab: true
+Grab: false
+Grab: true
+Grab: false
+Grab: true
+Grab: false
+Grab: true
+Grab: false
+Grab: true
+GLFW: Set size for window 505677958752, width=1000, height=466
+GLFW: Set size for window 505677958752, width=846, height=396
+GLFW: Set size for window 505677958752, width=770, height=360
+GLFW: Set size for window 505677958752, width=846, height=396
+GLFW: Set size for window 505677958752, width=1000, height=466
+GLFW: Set size for window 505677958752, width=1308, height=612
+GLFW: Set size for window 505677958752, width=1462, height=684
+GLFW: Set size for window 505677958752, width=1540, height=720
+java.net.UnknownHostException: login.minecraft.net
+	at java.net.AbstractPlainSocketImpl.connect(Unknown Source)
+	at java.net.SocksSocketImpl.connect(Unknown Source)
+	at java.net.Socket.connect(Unknown Source)
+	at sun.security.ssl.SSLSocketImpl.connect(Unknown Source)
+	at sun.security.ssl.BaseSSLSocketImpl.connect(Unknown Source)
+	at sun.net.NetworkClient.doConnect(Unknown Source)
+	at sun.net.www.http.HttpClient.openServer(Unknown Source)
+	at sun.net.www.http.HttpClient.openServer(Unknown Source)
+	at sun.net.www.protocol.https.HttpsClient.<init>(Unknown Source)
+	at sun.net.www.protocol.https.HttpsClient.New(Unknown Source)
+	at sun.net.www.protocol.https.AbstractDelegateHttpsURLConnection.getNewHttpClient(Unknown Source)
+	at sun.net.www.protocol.http.HttpURLConnection.plainConnect0(Unknown Source)
+	at sun.net.www.protocol.http.HttpURLConnection.plainConnect(Unknown Source)
+	at sun.net.www.protocol.https.AbstractDelegateHttpsURLConnection.connect(Unknown Source)
+	at sun.net.www.protocol.https.HttpsURLConnectionImpl.connect(Unknown Source)
+	at kl.run(SourceFile:1162)
+Grab: false
+Grab: true
+Grab: false
+Grab: true
+Grab: false
+Grab: true
+Grab: false
+Grab: true
+Grab: false
+Grab: true
+Grab: false
+Grab: true
+Grab: false
+Grab: true
+Grab: false
+Grab: true
+Grab: false
+Grab: true
+Grab: false
+Grab: true
+Grab: false
+Grab: true
+Grab: false
+Grab: true
+Grab: false
+Grab: true
+Grab: false
+Grab: true
+Grab: false
+Grab: true
+Grab: false
+Stopping!
+
+SoundSystem shutting down...
+Error in class 'SoundSystem'
+    Problem during Library.cleanup()!
+Ignoring errors... continuing clean-up.
+    Author: Paul Lamb, www.paulscode.com
+
